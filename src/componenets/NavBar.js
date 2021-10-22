@@ -1,12 +1,25 @@
 import { Link } from 'react-router-dom';
 
 
-const NavBar = () => {
+const NavBar = (props) => {
+    console.log(props.user);
+    let nav = props.user.user ?
+        <div>
+            {console.log('login true')}
+            <Link to='' onClick={props.handleLogout}>Log Out</Link>
+            <span>Welcome, {props.user.user.username}</span>
+        </div>
+        :
+        <div>
+            {console.log('login false')}
+            <Link to="/" >LOG IN</Link>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <Link to="/signup">SIGN UP</Link>
+        </div>
+
   return (
-    <div className='NavBar'>
-      <Link to="/" className='NavBar-link'>LOG IN</Link>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to="/signup" className='NavBar-link'>SIGN UP</Link>
+    <div>
+        {nav}
     </div>
   );
 };

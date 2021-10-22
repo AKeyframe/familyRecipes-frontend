@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { login } from '../services/userService';
 
 function Login(props) {
     const [formState, setFormState] = useState({
@@ -9,13 +9,20 @@ function Login(props) {
     });
 
     function handleChange(e) {
-        // TODO: write the handleChange logic
+        setFormState(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }));
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            // TODO: write handleSubmit logic
+            console.log('am i even trying?')
+            await login(formState);
+            console.log('done waiting');
+            props.handleSignupOrLogin();
+            props.history.push('/index');
 
         } catch (err) {
             // Use a modal or toast in your apps instead of alert
@@ -49,7 +56,7 @@ function Login(props) {
     
                 <div>
                     <div className="text-center">
-                        <button>Log In</button>&nbsp; &nbsp;
+                        <button type="submit">Log In</button>&nbsp; &nbsp;
                         <Link to='/'>Cancel</Link>
                     </div>
                     <div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { signup } from '../services/userService';
 
 
 function SignupForm (props) {
@@ -10,22 +11,6 @@ function SignupForm (props) {
     password: '',
     passwordConf: ''
   });
-
-  const URL = 'http://localhost:4000/users/'
-
-  function signup(user) {
-    return fetch(URL + 'signup', {
-      method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify(user)
-    })
-    .then(res => {
-      if (res.ok) return res.json();
-      // Probably a duplicate email
-      throw new Error('Email already taken!');
-    })
-    .then(data => data);
-  }
 
 
   function handleChange(e) {
@@ -41,9 +26,11 @@ function SignupForm (props) {
   async function handleSubmit (event) {
     event.preventDefault();
     try {
-      await signup(formState);
+        await signup(formState);
+        props.handleSignupOrLogin();
+
       // Successfully signed up - show GamePage
-      props.history.push('/');
+      props.history.push('/index');
     } catch (err) {
       // Invalid user data (probably duplicate email)
       props.updateMessage(err.message);
@@ -53,9 +40,10 @@ function SignupForm (props) {
   function isFormInvalid() {
     return !(formState.username && formState.email && formState.password === formState.passwordConf);
   }
-    return (
-      <div>
-        <header>Sign Up</header>
+
+  return (
+    <div>
+      <header>Sign Up</header>
         <form onSubmit={handleSubmit} >
             <div>
               <input type="text"  placeholder="Username" value={formState.username} name="username" onChange={handleChange} />
