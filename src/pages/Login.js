@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { login } from '../services/userService';
 
-function Login(props) {
+export default function Login(props) {
     const [formState, setFormState] = useState({
         username: "",
         pw: ""
@@ -22,7 +22,7 @@ function Login(props) {
             await login(formState);
             console.log('done waiting');
             props.handleSignupOrLogin();
-            props.history.push('/index');
+            props.history.push('/home');
 
         } catch (err) {
             // Use a modal or toast in your apps instead of alert
@@ -67,5 +67,3 @@ function Login(props) {
         </div>
     );
 }
-
-export default Login;

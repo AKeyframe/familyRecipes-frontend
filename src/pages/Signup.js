@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SignupForm from '../componenets/SignupForm';
 
 
-function Signup(props){
+export default function Signup(props){
 
   const [messageState, setMessageState] = useState({
     msg: ''
@@ -19,5 +19,3 @@ function Signup(props){
       </div>
     );
 }
-
-export default Signup;

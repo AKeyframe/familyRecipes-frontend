@@ -7,6 +7,7 @@ import './App.css';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Index from './pages/Index';
+import RecipeNew from './pages/RecipeNew';
 
 import NavBar from './componenets/NavBar';
 
@@ -39,6 +40,9 @@ function App() {
         }/>
 
         <Route path='/home' component={Index} />
+        <Route path='/recipe/new' render={props => 
+            <RecipeNew {...props} />
+        }/>
 
       </Switch>
     </div>
