@@ -10,17 +10,17 @@ const NavBar = (props) => {
             <span>Welcome, {props.user.user.username}</span>
         </div>
         :
-        <div>
+        <div className='cont'>
             {console.log('login false')}
-            <Link to="/" >LOG IN</Link>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <Link to="/signup">SIGN UP</Link>
+            <Link to="/" ><h2>LOG IN</h2></Link>
+            
+            <Link to="/signup"><h2>SIGN UP</h2></Link>
         </div>
 
   return (
-    <div>
+    <nav>
         {nav}
-    </div>
+    </nav>
   );
 };
 

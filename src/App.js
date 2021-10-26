@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import {useState} from 'react';
 
 
-import './App.css';
+import './App.scss';
 
 import Signup from './pages/Signup';
 import Login from './pages/Login';

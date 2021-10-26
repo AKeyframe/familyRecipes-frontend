@@ -1,11 +1,16 @@
 export default function IngredientInput(props){
-    const amount= `amount[${(props.pos)+1}]`
-    const ingred= `ingredients[${(props.pos)+1}].ingred`
+    let amount= `amount ${(props.pos)}`
+    let ingred= `ingred ${(props.pos)}`
+
+    if(props.first === 'true') {
+        amount= 'amount 0';
+        ingred= 'ingred 0';
+    }
 
     const checkFirst = props.first === 'true' ? <></> : <button onClick={() => props.handleRemoveIngredient(props.pos)} type='button'>-</button>
        
-
     return(
+        
         <div>
             <input type='text' name={amount} 
                 onChange={props.handleChange} placeholder='#'/>
