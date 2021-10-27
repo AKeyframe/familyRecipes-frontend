@@ -4,7 +4,6 @@ import RecipeResults from '../componenets/RecipeResults';
 
 export default function Index(props){
 
-    
 
     return(
         <div className='indexPage'>

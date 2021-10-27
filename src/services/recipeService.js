@@ -1,6 +1,6 @@
     
 const URL = "https://the-family-table.herokuapp.com/recipes";
-
+//const URL = "http://localhost:4000/recipes";
 const getRecipes = async () => {
     const response = await fetch(URL);
     const data = await response.json();
@@ -16,6 +16,9 @@ const getOneRecipe = async (id) => {
 }
 
 const createRecipe = async (recipe) => {
+    console.log('///////////////////////////////////////////////////////////');
+    console.log('///////////////////////////////////////////////////////////');
+    console.log(recipe);
     await fetch(URL, {
         method: "POST",
         headers: {
