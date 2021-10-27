@@ -4,21 +4,26 @@ import { Link } from 'react-router-dom';
 const NavBar = (props) => {
     console.log(props.user);
     let nav = props.user.user ?
-        <div>
-            {console.log('login true')}
-            <Link to='' onClick={props.handleLogout}>Log Out</Link>
-            <span>Welcome, {props.user.user.username}</span>
+        <div className='nav'>
+            <Link to='/home'><h2>The Family Table</h2></Link>
+            <form>
+                <input type="text" name='search' placeholder='Search Recipes (WIP)' />
+            </form>
+            <Link to='' onClick={props.handleLogout}><h2>Sign Out</h2></Link>
+            {/* ☰ */}
         </div>
         :
-        <div className='cont'>
-            {console.log('login false')}
-            <Link to="/" ><h2>LOG IN</h2></Link>
+        <div className='nav'>
+                <Link to="/signup"><h2>Sign Up</h2></Link>
+                <Link to="/" ><h2>Login</h2></Link>
+                
+                
             
-            <Link to="/signup"><h2>SIGN UP</h2></Link>
         </div>
 
   return (
     <nav>
+        
         {nav}
     </nav>
   );

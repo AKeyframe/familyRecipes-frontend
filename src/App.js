@@ -8,10 +8,12 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Index from './pages/Index';
 import RecipeNew from './pages/RecipeNew';
+import Show from './pages/Show';
 
 import NavBar from './componenets/NavBar';
 
 import {getUser, logout} from './services/userService';
+
 
 
 
@@ -41,9 +43,11 @@ function App() {
 
         <Route path='/home' component={Index} />
         <Route path='/recipe/new' render={props => 
-            <RecipeNew {...props} />
+            <RecipeNew user={userState} {...props} />
         }/>
 
+        <Route path='/recipe/:id' render={props => 
+            <Show {...props}/>} />
       </Switch>
     </div>
   );

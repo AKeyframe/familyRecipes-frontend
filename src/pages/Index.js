@@ -7,14 +7,21 @@ export default function Index(props){
     
 
     return(
-        <div>
-            <h1>hello</h1>
-            <Link to='/recipe/new'>
-                <h1>Add A Recipe</h1>
-            </Link>
+        <div className='indexPage'>
+            <div className='index'>
+                <div className='center'>
+                    <Link to='/recipe/new'>
+                        <div className='button'>
+                            <p>Add A Recipe</p>
+                        </div>
+                    </Link>
+                </div>
+                
 
-            <RecipeResults />
+                
+                    <RecipeResults />
             
+            </div>
         </div>
     );
 }

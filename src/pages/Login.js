@@ -32,38 +32,41 @@ export default function Login(props) {
 
     return (
         <div className="loginPage">
-            <header>Log In</header>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={formState.username}
-                        name="username"
-                        onChange={handleChange}
-                    />
-                </div>
-               
-                <div>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={formState.pw}
-                        name="pw"
-                        onChange={handleChange}
-                    />
-                </div>
-    
-                <div>
-                    <div className="text-center">
-                        <button type="submit">Log In</button>&nbsp; &nbsp;
-                        <Link to='/'>Cancel</Link>
-                    </div>
+            <div className='background'>
+                <h2>Log In</h2>
+                <form onSubmit={handleSubmit}>
                     <div>
-                        <Link to='/signup'>Sign Up</Link>
+                        <input 
+                            type="text"
+                            placeholder="Username"
+                            value={formState.username}
+                            name="username"
+                            onChange={handleChange}
+                        />
                     </div>
-                </div>
-            </form>
+                
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={formState.pw}
+                            name="pw"
+                            onChange={handleChange}
+                        />
+                    </div>
+        
+                    <div>
+                        <div>
+                            <button type="submit">Log In</button>&nbsp; &nbsp;
+                        
+                        </div>
+                        <div>
+                            <p>Don't have an Account? </p>
+                            <Link to='/signup'>Sign Up</Link>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

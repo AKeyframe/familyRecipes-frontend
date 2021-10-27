@@ -14,7 +14,8 @@ export default function RecipeResults(props) {
     const loaded = () => {
         console.log(recipes)
         return recipes.map((recipe) => (
-            <div key={recipe._id} className='recipe'>
+            <div key={recipe._id} className='recipe background'>
+              
                 <Link to={`/recipe/${recipe._id}`}>
                     <h1>{recipe.name}</h1>
                 </Link>

@@ -14,8 +14,8 @@ export default function Signup(props){
 
     return (
       <div className='SignupPage'>
-        <SignupForm {...props} updateMessage={updateMessage} />
-        <p>{messageState.msg}</p>
+          <SignupForm {...props} updateMessage={updateMessage} />
+          <p>{messageState.msg}</p>
       </div>
     );
 }

@@ -1,15 +1,244 @@
+$mainColor:rgb(242, 41, 68); //rgb(242, 71, 41) rgb(242, 41, 74) rgb(242, 71, 41)
+$secColor: rgba(255, 190, 179, 0.25); //rgb(255, 190, 179)
+$hoverColor: rgb(255, 238, 235);
+$bgColor: rgb(255, 255, 255);
+
+$shadow: rgba(0, 0, 0, 0.20) 3px 3px 3px;
+$textShadow: rgba(0, 0, 0, 0.20) 2px 2px 1px;
+$pressedShadow: rgba(0, 0, 0, 0.40) 2px 2px 2px;
+
 .App {
   text-align: center;
+  box-sizing: border-box;
+  
 }
 
-nav{
-  border: solid black 1px;
+html{
+  background-color: $secColor;
+  background-repeat: repeat;
+  background-size: contain;
 }
 
-body {
-  // aliceblue
-  background-color:floralwhite;
+
+
+a{
+  text-decoration: none;
+  color: $mainColor;
 }
-textarea {
-  resize: none;
+
+form{
+  margin: 5px;
+  padding: 3px;
+
+  input {
+    border-radius: 10px;
+    border: solid $mainColor;
+    box-shadow: $shadow;
+
+
+    background-color: $secColor;
+    color:$mainColor;
+    text-align: center;
+
+    margin: 8px 5px;
+    padding: 3px;
+  }
+  input::placeholder{
+    text-align: center;
+    color: $mainColor;
+  }
+
+  input:focus{
+    outline: none;
+  }
+
+  textarea {
+    resize: none;
+    width:100%;
+  }
+
+  button{
+    background-color: $mainColor;
+    color: $bgColor;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: $shadow;
+
+    margin: 5px;
+    margin-top: 10px;
+    padding: 2px;
+  }
+
+  button:hover{
+    background-color: $bgColor;
+    color:$mainColor;
+    border: $mainColor solid 1px;
+    box-shadow: $pressedShadow;
+  }
+ 
 }
+
+p {
+  margin: 5px 0px;
+}
+
+.nav{
+  display:flex;
+  justify-content: space-between;
+  
+  background-color: $mainColor;
+
+  .cont {
+    display:flex;
+  }
+
+  a{
+    display:flex;
+    margin: 0px 5px 0px 5px;
+    padding: 0px 3px 0px 3px;
+    color: $bgColor;
+  }
+
+  a:hover{
+    background-color:$hoverColor;
+    color:$mainColor;
+  }
+ 
+  form{
+    margin: auto;
+    
+    input{
+      border: solid black .75px;
+      margin-top: 6px;
+      width: 150px;
+      height: 25px;
+
+      text-align: center;
+      background-color:$hoverColor;
+      color: $mainColor;
+    }
+    input::placeholder{
+      color: $mainColor;
+      text-align: center;
+    }
+  }
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+//                           Classes
+/////////////////////////////////////////////////////////////////////////
+.background{
+  background-color:$bgColor;
+  border-radius: 10px;
+  box-shadow: $shadow;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+
+
+  width: 200px;
+  h2{
+    color:$mainColor;
+    text-shadow: $textShadow;
+  }
+
+  button{
+    width: 170px;
+    height: 25px;
+  }
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  background-color: $mainColor;
+  color:$bgColor;
+  border-radius: 3px;
+  box-shadow: $shadow;
+  width: 125px;
+  height: 35px;
+
+
+  p{
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.button:hover{
+  background-color: $bgColor;
+  color:$mainColor;
+  border: $mainColor solid 1px;
+  box-shadow: $pressedShadow;
+}
+
+.center{
+  margin: auto;
+}
+
+.recipe{
+  margin: 15px auto;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//                        Pages
+///////////////////////////////////////////////////////////////////////////
+
+.signUp{
+  margin-top: 50px;
+}
+
+.index{
+  display: flex;
+  flex-direction: column;
+
+  .button{
+    margin-top: 15px;
+  }
+}
+
+.new{
+  display:flex;
+  flex-direction: column;
+
+  margin-top: 25px;
+  padding:2px;
+  width: 280px;
+
+  input {
+    background-color: #fff;
+    color: black;
+    border: solid black .75px;
+  }
+  
+  input::placeholder{
+    color: grey;
+  }
+
+  .ingredient{
+    display: flex;
+  }
+  .amInp {
+    margin: 8px 3px;
+    width:50px;
+  }
+  .ingInp{
+    margin: 8px 3px;
+    width: 150px;
+  }
+
+  .minus{
+    width: 25px;
+  }
+  .plus{
+    margin-bottom: 10px;
+    width: 50px;
+  }
+
+}
+

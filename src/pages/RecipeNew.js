@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import {useState} from 'react';
 import { createRecipe } from '../services/recipeService';
 import IngredientInput from '../componenets/IngredientInput';
 
@@ -20,7 +20,7 @@ export default function RecipeNew(props) {
     const [ingred, setIngred] = useState([-1]);
 
     const [numOfSteps, setNumOfSteps] = useState([]);
-
+    
     console.log('numOfI');
     console.log(numOfI);
     console.log('formstate');
@@ -48,7 +48,6 @@ export default function RecipeNew(props) {
     }
 
     function handleChange(event) {
-        console.log(event.target)
         if((event.target.name).split(' ')[0] === 'amount'){
             setAmount(prev => {
                 let newArray=[...prev];
@@ -81,7 +80,6 @@ export default function RecipeNew(props) {
 
 
     function handleAdditionalIngredient() {
-
         const newArray = [];
         newArray.push(
             <IngredientInput pos={numOfI.length} key={numOfI.length} handleRemoveIngredient={handleRemoveIngredient}
@@ -91,9 +89,6 @@ export default function RecipeNew(props) {
 
         setAmount(prev => [...prev, -1]);
         setIngred(prev => [...prev, -1]);
-        console.log('numOfI');
-        console.log(numOfI);
-
     }
 
     function handleRemoveIngredient(pos) {
@@ -121,28 +116,28 @@ export default function RecipeNew(props) {
                 return ing;
             }
         })]);
-
-      
-       
     }
 
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div className='ingred'>
-                    <input type='text' name='name'
-                        placeholder='Name' onChange={handleChange} />
+        <div className='recipeNewPage'>
+            <div className='background new'>
+                <form onSubmit={handleSubmit}>
+                    <div className='ingred'>
+                        <input type='text' name='name'
+                            placeholder='Name' onChange={handleChange} />
 
-                    {numOfI}
+                        {numOfI}
 
-                    <button type="button" onClick={handleAdditionalIngredient}>+</button>
-                </div>
+                        <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
+                    </div>
 
-                <div className='steps'>
-                    <textarea cols="40" rows="5" type="" name='steps[]' placeholder={`Step ${numOfSteps + 1}`} />
-                </div>
-                <button>Submit</button>
-            </form>
+                    <div className='steps'>
+                        <textarea cols="40" rows="5" type="" name='steps[]' placeholder={`Step ${numOfSteps + 1}`} />
+                    </div>
+                    <button>Submit</button>
+                </form>
+            </div>
         </div>
     );
 }

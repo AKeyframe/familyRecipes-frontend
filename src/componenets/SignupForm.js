@@ -42,30 +42,33 @@ function SignupForm (props) {
   }
 
   return (
-    <div>
-      <header>Sign Up</header>
-        <form onSubmit={handleSubmit} >
-            <div>
-              <input type="text"  placeholder="Username" value={formState.username} name="username" onChange={handleChange} />
-            </div>
+    <div className='signUpForm'>
+      <div className='background signUp'>
+        <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit} >
+              <div>
+                <input type="text"  placeholder="Username" value={formState.username} name="username" onChange={handleChange} />
+              </div>
+            
+              <div>
+                <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={handleChange} />
+              </div>
+            
+              <div>
+                <input type="password" className="form-control" placeholder="Password" value={formState.password} name="password" onChange={handleChange} />
+              </div>
           
-            <div>
-              <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={handleChange} />
-            </div>
-          
-            <div>
-              <input type="password" className="form-control" placeholder="Password" value={formState.password} name="password" onChange={handleChange} />
-            </div>
-        
-            <div>
-              <input type="password" className="form-control" placeholder="Confirm Password" value={formState.passwordConf} name="passwordConf" onChange={handleChange} />
-            </div>
-          
-            <div>
-              <button className="btn btn-default" disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
-        </form>
+              <div>
+                <input type="password" className="form-control" placeholder="Confirm Password" value={formState.passwordConf} name="passwordConf" onChange={handleChange} />
+              </div>
+            
+              <div>
+                <button className="btn btn-default" disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
+                <p>Already have an Account?</p>
+                <Link to='/'>Login</Link>
+              </div>
+          </form>
+        </div>
       </div>
     );
 }

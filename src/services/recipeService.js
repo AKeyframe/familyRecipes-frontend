@@ -8,10 +8,14 @@ const getRecipes = async () => {
     return(ret);
 };
 
-const createRecipe = async (recipe) => {
+const getOneRecipe = async (id) => {
+    const response = await fetch(URL+'/'+id);
+    const data = await response.json();
+    const ret = await data;
+    return(ret);
+}
 
-    console.log('==========---------------==================');
-    console.log(recipe);
+const createRecipe = async (recipe) => {
     await fetch(URL, {
         method: "POST",
         headers: {
@@ -26,5 +30,6 @@ const createRecipe = async (recipe) => {
 
 export {
     getRecipes,
+    getOneRecipe,
     createRecipe
 }
