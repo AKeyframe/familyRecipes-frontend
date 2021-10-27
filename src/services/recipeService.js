@@ -20,6 +20,7 @@ const createRecipe = async (recipe) => {
         method: "POST",
         headers: {
           "Content-Type": "Application/json",
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(recipe),
     });

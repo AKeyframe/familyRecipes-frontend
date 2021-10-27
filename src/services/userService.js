@@ -6,7 +6,8 @@ const URL = 'https://the-family-table.herokuapp.com/users/'
 function signup(user) {
   return fetch(URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json'}),
+    headers: new Headers({'Content-Type': 'application/json', 
+              'Access-Control-Allow-Origin': '*'}),
     body: JSON.stringify(user)
   })
   .then(res => {
@@ -28,7 +29,7 @@ function login(creds){
     return fetch(URL+'login', {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json',
-                              }), //Authorization: `bearer `,
+        'Access-Control-Allow-Origin': '*'}), //Authorization: `bearer `,
         body: JSON.stringify(creds)
     })
     .then(res => {
