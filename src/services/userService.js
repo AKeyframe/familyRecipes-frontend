@@ -8,6 +8,7 @@ function signup(user) {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json', 
               'Access-Control-Allow-Origin': '*'}),
+    mode:'no-cors',
     body: JSON.stringify(user)
   })
   .then(res => {
@@ -30,6 +31,7 @@ function login(creds){
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'}), //Authorization: `bearer `,
+        mode:'no-cors',
         body: JSON.stringify(creds)
     })
     .then(res => {

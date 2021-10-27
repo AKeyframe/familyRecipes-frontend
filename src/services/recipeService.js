@@ -22,6 +22,7 @@ const createRecipe = async (recipe) => {
           "Content-Type": "Application/json",
           'Access-Control-Allow-Origin': '*'
         },
+        mode:'no-cors',
         body: JSON.stringify(recipe),
     });
     getRecipes();
