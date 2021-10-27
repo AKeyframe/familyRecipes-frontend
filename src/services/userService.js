@@ -6,9 +6,7 @@ const URL = 'https://the-family-table.herokuapp.com/users/'
 function signup(user) {
   return fetch(URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json', 
-              'Access-Control-Allow-Origin': '*'}),
-    mode:'no-cors',
+    headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
   })
   .then(res => {
@@ -25,17 +23,12 @@ function getUser(){
 }
 
 function login(creds){
-    console.log('login()');
-    console.log(creds)
     return fetch(URL+'login', {
         method: 'POST',
-        headers: new Headers({'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'}), //Authorization: `bearer `,
-        mode:'no-cors',
+        headers: new Headers({'Content-Type': 'application/json'}), //Authorization: `bearer `,
         body: JSON.stringify(creds)
     })
     .then(res => {
-        console.log(res);
         if(res.ok) return res.json();
         throw new Error('Bad Credentials!');
     })

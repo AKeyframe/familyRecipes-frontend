@@ -19,10 +19,8 @@ const createRecipe = async (recipe) => {
     await fetch(URL, {
         method: "POST",
         headers: {
-          "Content-Type": "Application/json",
-          'Access-Control-Allow-Origin': '*'
+          "Content-Type": "Application/json"
         },
-        mode:'no-cors',
         body: JSON.stringify(recipe),
     });
     getRecipes();
