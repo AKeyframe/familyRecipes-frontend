@@ -58,7 +58,7 @@ export default function Show(props){
                             {recipe.steps.map((step, i) => {
                                 return(
                                     <div className='step' key={i}>
-                                        <p><strong>1: </strong>{step}</p>
+                                        <p><strong>{i+1}: </strong>{step}</p>
                                     </div>
                                 );
                             })}

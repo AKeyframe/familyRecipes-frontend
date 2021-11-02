@@ -226,12 +226,14 @@ p {
     
   }
 
-  .step {
+  .stepInp{
     display: flex;
-    margin: 15px 5px;
+    flex-direction: row;
   }
 
-
+  .stepText{
+    margin-top: 15px;
+  }
 
   .blankMinusDiv {
     width: 35px;
@@ -266,12 +268,14 @@ p {
 .show {
   margin-top:40px;
   padding: 10px;
-  width: 250px;
+  width: 270px;
   
 
   .ingredientsList{
     display: flex;
     justify-content: space-between;
+
+    
 
     h4, p{
       margin: 10px 10px;
@@ -284,9 +288,25 @@ p {
   }
   
   .stepsList {
+    display: flex;
+    flex-direction: column;
 
+
+    .step{
+      margin: 5px;
+    }
+    strong{
+      font-size: 16px;
+      margin-right: 20px;
+    }
     p{
-      font-size: 14px;
+      text-align: left;
+      font-size: 12px;
+      border: solid black .75px;
+      border-radius: 5px;
+      box-shadow: $shadow;
+
+      padding: 10px;
     }
   }
  

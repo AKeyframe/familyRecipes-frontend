@@ -5,7 +5,7 @@ import StepInput from '../componenets/StepInput';
 
 
 export default function RecipeNew(props) {
-    
+    //Probably don't need this
     const [formState, setFormState] = useState({
         creator: '',
         access: '',
@@ -19,18 +19,23 @@ export default function RecipeNew(props) {
     const [subTime, setSubTime] = useState(false);
     const bool = useRef(false); //wish i found useRef earlier 
 
+    //Responsible for the Components associated with Ingredients
     const [numOfI, setNumOfI] = useState([<IngredientInput first='true' handleChange={handleChange} key={0} />]);
    
+    //Responsible for the value of each amount/ingred input
     const [amount, setAmount] = useState([-1]);
     const [ingred, setIngred] = useState([-1]);
 
+    //Responsible for the Components associated with Steps
     const [numOfSteps, setNumOfSteps] = useState([<StepInput first='true'       
         name='step 0' key='0' placeholder='Step 1' 
         handleRemoveStep={handleRemoveStep} handleChange={handleChange}/>]);
     
+    //Responsible for the value of each step input/textarea
     const [steps, setSteps] = useState([-1]);
 
-    
+    //Checks to see if ready to submit, 
+    //right now that just means you've clicked the submit button
     useEffect(() => {
         if(bool.current){
             submit()
@@ -39,16 +44,8 @@ export default function RecipeNew(props) {
         }
         }, [subTime]);
 
-
-    console.log(props);
-    console.log('numOfI');
-    console.log(numOfI);
-    console.log('submitForm');
-    console.log(submitForm);
-    console.log('formstate');
-    console.log(formState);
-   
-
+    
+    //This function gets everything ready for submission.
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -60,7 +57,6 @@ export default function RecipeNew(props) {
             }
         })]);
 
-        console.log('================================');
         setFormState(prevForm => {
             let amountArray = [];
             let ingredArray = [];
@@ -75,7 +71,6 @@ export default function RecipeNew(props) {
                         amountArray.push(am);
                     }
                 });
-                console.log(amountArray);
 
                 setIngred(prev => {
                     prev.map((ing, i) => {
@@ -85,7 +80,6 @@ export default function RecipeNew(props) {
                             ingredArray.push(ing);
                         }
                     });
-                    console.log(ingredArray);
 
 
                     for(let i=0; i<amountArray.length; i++){
@@ -93,10 +87,7 @@ export default function RecipeNew(props) {
                                             ingred: ingredArray[i]});
                     }
                     
-                    newForm = 
-                    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
-                    console.log(newForm);
-                    console.log(prevForm.recipeName);
+            
                     setSubmitForm({
                         creator: props.user.user._id,
                         access: 'private',
@@ -121,6 +112,7 @@ export default function RecipeNew(props) {
         
     }
 
+    //Sends the information to the backend
     async function submit(){
         bool.current = false;
         setSubTime(false);
@@ -185,7 +177,7 @@ export default function RecipeNew(props) {
         setFormState({ ...formState, [event.target.name]: event.target.value });
     }
 
-
+    //When a + button for ingredients is pushed
     function handleAdditionalIngredient() {
         const newArray = [];
         newArray.push(
@@ -198,6 +190,7 @@ export default function RecipeNew(props) {
         setIngred(prev => [...prev, -1]);
     }
 
+    //When a + button for steps is pushed
     function handleAdditionalStep(){
         setNumOfSteps(prev => [...prev, 
             <StepInput pos={numOfSteps.length}
@@ -210,6 +203,7 @@ export default function RecipeNew(props) {
         setSteps(prev => [...prev, -1]);
     }
 
+    //When a - button for ingredients is pushed
     function handleRemoveIngredient(pos) {
         setNumOfI(prev => [...prev.map( (ing, i) => {
             if(pos === i){
@@ -237,6 +231,7 @@ export default function RecipeNew(props) {
         })]);
     }
 
+    //When a - button for Steps is pushed
     function handleRemoveStep(pos){
         setNumOfSteps(prev => [...prev.map((step, i) => {
             if(pos === i) {
