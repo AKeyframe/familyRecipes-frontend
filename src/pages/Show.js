@@ -11,25 +11,59 @@ export default function Show(props){
     }
 
     useEffect(() => updateRecipe(), []);
-    console.log(recipe);
 
-    const tempShowIng = () => {
-        let newArray = [];
-        recipe.ingredients.forEach((rec, i) => {
-            newArray.push(<p>Amount: {rec.amount} ingredient: {rec.ingred}</p>)
-               
-          
-        })
-        setTemp(prev => [...prev, newArray])
-    }
+
 
     const loaded = () => {
         return(
             <div className='showPage'>
-                <div className='show'>
+                <div className='show background'>
                     <h1>{recipe.name}</h1>
-                    <p>temp show</p>
-                    <h3>Amount: {recipe.ingredients[0].amount} Ingredient: {recipe.ingredients[0].ingred}</h3>
+                    
+                    <div className='ingredientsList'>
+                        <div className='amounts'>
+                            <div className='amHead'>
+                                <h4>Amount</h4>
+                            </div>
+                            {recipe.ingredients.map((ing, i) => {
+                                console.log(ing)
+                                return(
+                                        <div className='amount' key={i}>
+                                            <p>{ing.amount}</p>
+                                        </div>
+                                );
+                            })}
+                        </div>
+
+                        <div className='ingredients'>
+                            <div className='ingHead'>
+                                <h4>Ingredient</h4>
+                            </div>
+                            {recipe.ingredients.map((ing, i) => {
+                                console.log(ing)
+                                return(
+                                        <div className='ingred' key={i}>
+                                            <p>{ing.ingred}</p>
+                                        </div>
+                                );
+                            })}
+                        </div>
+                        
+                    </div>
+                    <div className='instructions'>
+                        <h3>Instructions</h3>
+                    </div>
+
+                    <div className='stepsList'>
+                            {recipe.steps.map((step, i) => {
+                                return(
+                                    <div className='step' key={i}>
+                                        <p><strong>1: </strong>{step}</p>
+                                    </div>
+                                );
+                            })}
+                        </div>        
+                
                 </div>
             </div>
         );
@@ -39,9 +73,6 @@ export default function Show(props){
         return <h1>Loading...</h1>;
     };
 
-    function showRecipe(){
-
-    }
 
     return recipe ? loaded() : loading();
 }

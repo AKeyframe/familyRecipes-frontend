@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import { createRecipe } from '../services/recipeService';
 import IngredientInput from '../componenets/IngredientInput';
+import StepInput from '../componenets/StepInput';
 
 
 export default function RecipeNew(props) {
@@ -16,15 +17,18 @@ export default function RecipeNew(props) {
     const [name, setName] = useState('');
     const [submitForm, setSubmitForm] = useState({});
     const [subTime, setSubTime] = useState(false);
-    const bool = useRef(false);
+    const bool = useRef(false); //wish i found useRef earlier 
 
-    const [numOfI, setNumOfI] = useState([<IngredientInput first='true' handleChange={handleChange}
-    key={0}/>]);
+    const [numOfI, setNumOfI] = useState([<IngredientInput first='true' handleChange={handleChange} key={0} />]);
    
     const [amount, setAmount] = useState([-1]);
     const [ingred, setIngred] = useState([-1]);
 
-    const [numOfSteps, setNumOfSteps] = useState([]);
+    const [numOfSteps, setNumOfSteps] = useState([<StepInput first='true'       
+        name='step 0' key='0' placeholder='Step 1' 
+        handleRemoveStep={handleRemoveStep} handleChange={handleChange}/>]);
+    
+    const [steps, setSteps] = useState([-1]);
 
     
     useEffect(() => {
@@ -47,6 +51,15 @@ export default function RecipeNew(props) {
 
     async function handleSubmit(event) {
         event.preventDefault();
+
+        setSteps(prev => [...prev.map((step, i) => {
+            if(step === undefined || step === -1){
+                return;
+            } else {
+                return step;
+            }
+        })]);
+
         console.log('================================');
         setFormState(prevForm => {
             let amountArray = [];
@@ -89,7 +102,7 @@ export default function RecipeNew(props) {
                         access: 'private',
                         name: name,
                         ingredients: [...ingredients],
-                        steps: []
+                        steps: [...steps]
                     });
                     
                     setSubTime(true);
@@ -137,6 +150,7 @@ export default function RecipeNew(props) {
             });
         }
 
+
         if((event.target.name).split(' ')[0] === 'ingred'){
             setIngred(prev => {
                 let newArray=[...prev];
@@ -146,6 +160,18 @@ export default function RecipeNew(props) {
                     }
                 });
                return [...newArray] 
+            });
+        }
+
+        if((event.target.name).split(' ')[0] === 'step'){
+            setSteps(prev => {
+                let newArray = [...prev];
+                prev.forEach((step, i) => {
+                    if((event.target.name).split(' ')[1] == i){
+                        newArray[i]=event.target.value;
+                    }
+                });
+                return [...newArray];
             });
         }
 
@@ -170,6 +196,18 @@ export default function RecipeNew(props) {
 
         setAmount(prev => [...prev, -1]);
         setIngred(prev => [...prev, -1]);
+    }
+
+    function handleAdditionalStep(){
+        setNumOfSteps(prev => [...prev, 
+            <StepInput pos={numOfSteps.length}
+                key={numOfSteps.length}
+                name={`step ${numOfSteps.length}`}
+                placeholder={`Step ${numOfSteps.length+1}`}
+                handleChange={handleChange}
+                handleRemoveStep={handleRemoveStep}/>]);
+
+        setSteps(prev => [...prev, -1]);
     }
 
     function handleRemoveIngredient(pos) {
@@ -199,6 +237,23 @@ export default function RecipeNew(props) {
         })]);
     }
 
+    function handleRemoveStep(pos){
+        setNumOfSteps(prev => [...prev.map((step, i) => {
+            if(pos === i) {
+                return;
+            } else {
+                return step;
+            }
+        })]);
+
+        setSteps(prev => [...prev.map((step, i) => {
+            if(pos === i) {
+                return;
+            } else {
+                return step;
+            }
+        })]);
+    }
     
     return (
         <div className='recipeNewPage'>
@@ -215,9 +270,9 @@ export default function RecipeNew(props) {
                         <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
                     </div>
 
-                    <div className='steps'>
-                        <textarea cols="40" rows="5" type="" name='steps[]' placeholder={`Step ${numOfSteps + 1}`} />
-                    </div>
+                    {numOfSteps}
+                    
+                    <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
                     <button>Submit</button>
                 </form>
             </div>

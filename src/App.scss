@@ -54,7 +54,10 @@ form{
 
   textarea {
     resize: none;
-    width:100%;
+    width:85%;
+
+    border: black solid .75px;
+    box-shadow: $shadow;
   }
 
   button{
@@ -210,10 +213,28 @@ p {
   padding:2px;
   width: 280px;
 
+  form {
+    margin: 2px;
+    padding: 2px;
+  }
+
   input {
     background-color: #fff;
-    color: black;
     border: solid black .75px;
+    color: black;
+    font-size: 14px;
+    
+  }
+
+  .step {
+    display: flex;
+    margin: 15px 5px;
+  }
+
+
+
+  .blankMinusDiv {
+    width: 35px;
   }
   
   input::placeholder{
@@ -225,7 +246,7 @@ p {
   }
   .amInp {
     margin: 8px 3px;
-    width:50px;
+    width:65px;
   }
   .ingInp{
     margin: 8px 3px;
@@ -240,5 +261,34 @@ p {
     width: 50px;
   }
 
+}
+
+.show {
+  margin-top:40px;
+  padding: 10px;
+  width: 250px;
+  
+
+  .ingredientsList{
+    display: flex;
+    justify-content: space-between;
+
+    h4, p{
+      margin: 10px 10px;
+    }
+  }
+
+  .ingHeaders{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .stepsList {
+
+    p{
+      font-size: 14px;
+    }
+  }
+ 
 }
 
