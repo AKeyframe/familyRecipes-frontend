@@ -18,9 +18,8 @@ export default function Login(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            console.log('am i even trying?')
+            console.log('Heroku Booting Up');
             await login(formState);
-            console.log('done waiting');
             props.handleSignupOrLogin();
             props.history.push('/home');
 

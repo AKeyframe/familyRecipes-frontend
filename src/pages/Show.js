@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { getOneRecipe } from "../services/recipeService";
+import { getOneRecipe, deleteRecipe } from "../services/recipeService";
 
 export default function Show(props){
 
@@ -11,12 +11,19 @@ export default function Show(props){
     }
 
     useEffect(() => updateRecipe(), []);
-
+    console.log(props);
+    async function handleSubmit(){
+        deleteRecipe(await props.match.params.id);
+        props.history.push('/home');
+    }
 
 
     const loaded = () => {
         return(
             <div className='showPage'>
+                <form onSubmit={handleSubmit}>
+                    <button>Delete Recipe</button>
+                </form>
                 <div className='show background'>
                     <h1>{recipe.name}</h1>
                     

@@ -16,9 +16,6 @@ const getOneRecipe = async (id) => {
 }
 
 const createRecipe = async (recipe) => {
-    console.log('///////////////////////////////////////////////////////////');
-    console.log('///////////////////////////////////////////////////////////');
-    console.log(recipe);
     await fetch(URL, {
         method: "POST",
         headers: {
@@ -29,10 +26,16 @@ const createRecipe = async (recipe) => {
     getRecipes();
 };
 
+const deleteRecipe = async (recipe) => {
+    console.log(recipe);
+    
+}
+
 
 
 export {
     getRecipes,
     getOneRecipe,
-    createRecipe
+    createRecipe,
+    deleteRecipe
 }

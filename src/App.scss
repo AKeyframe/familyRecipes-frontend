@@ -91,6 +91,9 @@ p {
   justify-content: space-between;
   
   background-color: $mainColor;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: $shadow;
 
   .cont {
     display:flex;
@@ -265,8 +268,22 @@ p {
 
 }
 
+.showPage{
+  button{
+    background-color: $mainColor;
+    color:$bgColor;
+    border-radius: 3px;
+    box-shadow: $shadow;
+    width: 130px;
+    height: 35px;
+
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
 .show {
-  margin-top:40px;
+  margin-top:20px;
   padding: 10px;
   width: 270px;
   
@@ -275,10 +292,14 @@ p {
     display: flex;
     justify-content: space-between;
 
-    
 
-    h4, p{
+    h4{
       margin: 10px 10px;
+    }
+
+    p{
+      margin: 10px 3px;
+      font-size: 12px;
     }
   }
 
