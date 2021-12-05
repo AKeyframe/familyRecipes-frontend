@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
+import { useNavigate } from 'react-router';
 import { createRecipe } from '../services/recipeService';
 import IngredientInput from '../componenets/IngredientInput';
 import StepInput from '../componenets/StepInput';
@@ -18,6 +19,7 @@ export default function RecipeNew(props) {
     const [submitForm, setSubmitForm] = useState({});
     const [subTime, setSubTime] = useState(false);
     const bool = useRef(false); //wish i found useRef earlier 
+    const navigate = useNavigate();
 
     //Responsible for the Components associated with Ingredients
     const [numOfI, setNumOfI] = useState([<IngredientInput first='true' handleChange={handleChange} key={0} />]);
@@ -126,7 +128,7 @@ export default function RecipeNew(props) {
         });
         setSubmitForm({});
        
-        props.history.push('/home');
+        navigate('/home');
     }
 
     function handleChange(event) {

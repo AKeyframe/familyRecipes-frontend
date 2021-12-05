@@ -8,18 +8,15 @@ $textShadow: rgba(0, 0, 0, 0.20) 2px 2px 1px;
 $pressedShadow: rgba(0, 0, 0, 0.40) 2px 2px 2px;
 
 .App {
-  text-align: center;
   box-sizing: border-box;
-  
 }
+
 
 html{
   background-color: $secColor;
   background-repeat: repeat;
   background-size: contain;
 }
-
-
 
 a{
   text-decoration: none;

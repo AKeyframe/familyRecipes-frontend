@@ -1,20 +1,26 @@
 import {useState, useEffect} from 'react';
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { getOneRecipe, deleteRecipe } from "../services/recipeService";
 
 export default function Show(props){
 
     const [recipe, setRecipe] = useState(null);
     const [temp, setTemp] = useState([]);
+
+    const params = useParams();
+    const navigate = useNavigate();
+
     async function updateRecipe() {
-        setRecipe(await getOneRecipe(props.match.params.id));
+        setRecipe(await getOneRecipe(params.id));
         
     }
 
     useEffect(() => updateRecipe(), []);
     console.log(props);
     async function handleSubmit(){
-        deleteRecipe(await props.match.params.id);
-        props.history.push('/home');
+        deleteRecipe(await params.id);
+        navigate('/home');
     }
 
 

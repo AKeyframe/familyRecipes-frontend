@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import {useState} from 'react';
 
 
@@ -32,25 +32,27 @@ function App() {
   return (
     <div className="App">
       <NavBar handleLogout={handleLogout} user={userState}/>
-      <Switch>
-        <Route exact path="/" render={props => 
-            <Login handleSignupOrLogin={handleSignupOrLogin} {...props} />
-        }/>
+      <Routes>
+        <Route path="/" element={
+            <Login handleSignupOrLogin={handleSignupOrLogin} />}
+        />
+        
+        <Route path="/signup" element={
+            <Signup handleSignupOrLogin={handleSignupOrLogin}/>}
+        />
 
-        <Route path="/signup" render={props => 
-            <Signup handleSignupOrLogin={handleSignupOrLogin} {...props} />
-        }/>
+        <Route path='/home' element={<Index />} />
+        <Route path='/recipe/new' element={ 
+            <RecipeNew user={userState}/>}
+        />
 
-        <Route path='/home' component={Index} />
-        <Route path='/recipe/new' render={props => 
-            <RecipeNew user={userState} {...props} />
-        }/>
-
-        <Route path='/recipe/:id' render={props => 
-            <Show {...props}/>} />
-      </Switch>
+        <Route path='/recipe/:id' element={ 
+            <Show />} 
+        />
+      </Routes>
     </div>
   );
+
 }
 
 

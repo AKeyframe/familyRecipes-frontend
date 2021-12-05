@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { login } from '../services/userService';
 
@@ -15,13 +16,15 @@ export default function Login(props) {
         }));
     }
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
             console.log('Heroku Booting Up');
             await login(formState);
             props.handleSignupOrLogin();
-            props.history.push('/home');
+            navigate('/home');
 
         } catch (err) {
             // Use a modal or toast in your apps instead of alert

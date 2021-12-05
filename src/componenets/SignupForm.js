@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { signup } from '../services/userService';
 
@@ -11,6 +12,8 @@ function SignupForm (props) {
     password: '',
     passwordConf: ''
   });
+
+  const navigate = useNavigate();
 
 
   function handleChange(e) {
@@ -30,7 +33,7 @@ function SignupForm (props) {
         props.handleSignupOrLogin();
 
       // Successfully signed up - show GamePage
-      props.history.push('/index');
+      navigate('/index');
     } catch (err) {
       // Invalid user data (probably duplicate email)
       props.updateMessage(err.message);
