@@ -2,6 +2,12 @@ import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {getRecipes} from '../services/recipeService';
 
+
+
+//Refactor this to be the componet for search results
+//Will Return any public, family, or personal recipe matching criteria
+
+
 export default function RecipeResults(props) {
     const [recipes, setRecipes] = useState(null);
 
@@ -16,7 +22,7 @@ export default function RecipeResults(props) {
         return recipes.map((recipe) => (
             <div key={recipe._id} className='recipe background'>
               
-                <Link to={`/recipe/${recipe._id}`}>
+                <Link to={`/recipes/${recipe._id}`}>
                     <h1>{recipe.name}</h1>
                 </Link>
             </div>

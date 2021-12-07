@@ -1,27 +1,44 @@
 import { Routes, Route} from 'react-router-dom';
-import {useState} from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 
 import './App.scss';
 
+//Pages
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Index from './pages/Index';
+import Home from './pages/Home';
+import UserRecipes from './pages/UserRecipes';
 import RecipeNew from './pages/RecipeNew';
 import Show from './pages/Show';
 
+//Components
 import NavBar from './componenets/NavBar';
 
-import {getUser, logout} from './services/userService';
-
-
+//Services
+import { getUser, logout } from './services/userService';
+import { getProfile } from './services/profileServices';
 
 
 function App() {
+  const navigate = useNavigate();
+
   const [userState, setUserState] = useState({user: getUser()});
+  const [profile, setProfile] = useState();
+
+  useEffect(async () => {
+    if(userState.user){
+      console.log(userState);
+      if(!profile){
+        setProfile(await getProfile(userState.user.profile));
+      }
+    }
+  }, []);
 
   function handleSignupOrLogin(){
     setUserState({user: getUser()});
+    
   }
   
   function handleLogout(){
@@ -41,12 +58,21 @@ function App() {
             <Signup handleSignupOrLogin={handleSignupOrLogin}/>}
         />
 
-        <Route path='/home' element={<Index />} />
-        <Route path='/recipe/new' element={ 
-            <RecipeNew user={userState}/>}
+        <Route path='/home' element={<Home />} />
+        <Route path='/recipes' element={
+            <UserRecipes  profile={profile}
+                          setProfile={setProfile}
+            />} 
+        />
+        
+        <Route path='/recipes/new' element={ 
+            <RecipeNew  user={userState} 
+                        profile={profile}
+                        setProfile={setProfile}
+            />}
         />
 
-        <Route path='/recipe/:id' element={ 
+        <Route path='/recipes/:id' element={ 
             <Show />} 
         />
       </Routes>
@@ -54,7 +80,5 @@ function App() {
   );
 
 }
-
-
 
 export default App;

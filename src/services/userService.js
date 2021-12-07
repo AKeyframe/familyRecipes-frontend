@@ -1,7 +1,7 @@
 import { setToken, getUserFromToken, removeToken } from './tokenService';
 
-
-const URL = 'https://the-family-table.herokuapp.com/users/'
+//const URL = 'https://the-family-table.herokuapp.com/users/'
+const URL = "http://localhost:4000/users/";
 
 function signup(user) {
   return fetch(URL + 'signup', {
@@ -21,6 +21,12 @@ function signup(user) {
 function getUser(){
     return getUserFromToken();
 }
+
+const getUserRecipes = async (id) => {
+  const response = await fetch(URL+'/'+id+'/recipes');
+  const data = await response.json();
+  return (data);
+};
 
 function login(creds){
     return fetch(URL+'login', {

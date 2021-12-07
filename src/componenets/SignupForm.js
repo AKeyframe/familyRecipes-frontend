@@ -33,7 +33,8 @@ function SignupForm (props) {
         props.handleSignupOrLogin();
 
       // Successfully signed up - show GamePage
-      navigate('/index');
+      navigate('/home');
+      
     } catch (err) {
       // Invalid user data (probably duplicate email)
       props.updateMessage(err.message);

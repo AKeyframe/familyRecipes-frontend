@@ -91,7 +91,7 @@ export default function RecipeNew(props) {
                     
             
                     setSubmitForm({
-                        creator: props.user.user._id,
+                        creator: props.profile._id,
                         access: 'private',
                         name: name,
                         ingredients: [...ingredients],
@@ -258,7 +258,7 @@ export default function RecipeNew(props) {
                 <form onSubmit={handleSubmit}>
                     <div className='ingred'>
                         <input type='hidden' name='creator' 
-                                value={props.user._id} />
+                                value={props.profile._id} />
                         <input type='text' name='recipeName'
                             placeholder='Recipe Name' onChange={handleChange} />
 

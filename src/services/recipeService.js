@@ -1,12 +1,16 @@
+import { findRenderedComponentWithType } from "react-dom/test-utils";
+
     
-const URL = "https://the-family-table.herokuapp.com/recipes";
-//const URL = "http://localhost:4000/recipes";
+//const URL = "https://the-family-table.herokuapp.com/recipes";
+const URL = "http://localhost:4000/recipes";
+
 const getRecipes = async () => {
-    const response = await fetch(URL);
+    const response = await fetch(URL+'/results'); 
     const data = await response.json();
     const ret = await data;
     return(ret);
 };
+
 
 const getOneRecipe = async (id) => {
     const response = await fetch(URL+'/'+id);
