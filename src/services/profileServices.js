@@ -17,7 +17,16 @@ const getProfileRecipes = async (id) => {
     return (data);
   };
 
+const getProfileFamilies = async (id) =>{
+    const response = await fetch(URL+'/'+id+'/families');
+    const data = await response.json();
+    console.log('Families');
+    console.log(data);
+    return data;
+}
+
 export {
    getProfile,
    getProfileRecipes,
+   getProfileFamilies,
 }

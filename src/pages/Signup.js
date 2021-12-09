@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SignupForm from '../componenets/SignupForm';
 
+import '../App.scss';
 
 export default function Signup(props){
 

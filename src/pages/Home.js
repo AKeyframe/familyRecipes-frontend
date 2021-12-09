@@ -30,6 +30,18 @@ export default function Home(props){
                <UserRecipes profile={props.profile}
                             setProfile={props.profile}
                 />
+
+                <Link to='/families/new'>
+                    <div className='button'>
+                        <p style={{fontSize: "13px"}}>New Family Table</p>
+                    </div>
+                </Link>
+
+                <Link to='/families'>
+                    <div className= 'button'>
+                        <p style={{fontSize: "13px"}}>Your Family's Tables</p>
+                    </div>
+                </Link>
             
             </div>
         </div>

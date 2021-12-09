@@ -9,7 +9,11 @@ import Signup from './pages/Signup';
 import Index from './pages/Index';
 import UserRecipes from './pages/UserRecipes';
 import RecipeNew from './pages/RecipeNew';
-import Show from './pages/Show';
+import RecipeShow from './pages/RecipeShow';
+import FamilyNew from './pages/FamilyNew';
+import Families from './pages/Families';
+import FamiliesShow from './pages/FamiliesShow';
+import FamilyRecipes from './pages/FamiliesRecipes';
 
 //Components
 import NavBar from './componenets/NavBar';
@@ -19,11 +23,17 @@ import { getUser, logout } from './services/userService';
 import { getProfile } from './services/profileServices';
 
 
+
+
+
+
 function App() {
 
   const [userState, setUserState] = useState({user: getUser()});
   const [profile, setProfile] = useState();
   const [update, setUpdate] = useState(false);
+
+  const [focusFamily, setFocusFamily] = useState(null);
 
   useEffect(() => {
     const checkProfile = async () => {
@@ -91,8 +101,29 @@ function App() {
         />
 
         <Route path='/recipes/:id' element={ 
-            <Show />} 
+            <RecipeShow />} 
         />
+
+        <Route path='/families' element={
+            <Families profile={profile}
+                      focusFamily={focusFamily}
+                      setFocusFamily={setFocusFamily}/>}
+        />
+
+        <Route path='/families/new' element={
+            <FamilyNew  profile={profile}/>}
+        />
+
+        <Route path='/families/:id' element={
+            <FamiliesShow focusFamily={focusFamily}
+                          setFocusFamily={setFocusFamily}/>}
+        />
+
+        <Route path='/families/:id/recipes' element={
+            <FamilyRecipes  focusFamily={focusFamily}
+                            setFocusFamily={setFocusFamily}/>}
+        />
+
       </Routes>
     </div>
   );

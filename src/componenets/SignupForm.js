@@ -19,7 +19,6 @@ function SignupForm (props) {
   function handleChange(e) {
     props.updateMessage('');
     setFormState(prevState => ({
-      // Using ES2015 Computed Property Names
       ...prevState,
       [e.target.name]: e.target.value
     }));
@@ -32,7 +31,7 @@ function SignupForm (props) {
         await signup(formState);
         props.handleSignupOrLogin();
 
-      // Successfully signed up - show GamePage
+      // Successfully signed up - show index
       navigate('/');
       
     } catch (err) {
