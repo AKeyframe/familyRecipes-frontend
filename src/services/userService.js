@@ -22,12 +22,6 @@ function getUser(){
     return getUserFromToken();
 }
 
-const getUserRecipes = async (id) => {
-  const response = await fetch(URL+'/'+id+'/recipes');
-  const data = await response.json();
-  return (data);
-};
-
 function login(creds){
     return fetch(URL+'login', {
         method: 'POST',

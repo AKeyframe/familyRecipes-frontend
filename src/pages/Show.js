@@ -6,7 +6,6 @@ import { getOneRecipe, deleteRecipe } from "../services/recipeService";
 export default function Show(props){
 
     const [recipe, setRecipe] = useState(null);
-    const [temp, setTemp] = useState([]);
 
     const params = useParams();
     const navigate = useNavigate();
@@ -20,7 +19,7 @@ export default function Show(props){
     console.log(props);
     async function handleSubmit(){
         deleteRecipe(await params.id);
-        navigate('/home');
+        navigate('/');
     }
 
 

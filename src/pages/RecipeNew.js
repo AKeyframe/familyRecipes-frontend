@@ -1,11 +1,13 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, forwardRef} from 'react';
 import { useNavigate } from 'react-router';
 import { createRecipe } from '../services/recipeService';
+// import { getProfile } from '../services/profileServices';
 import IngredientInput from '../componenets/IngredientInput';
 import StepInput from '../componenets/StepInput';
 
 
-export default function RecipeNew(props) {
+export default forwardRef(function RecipeNew (props, ref) {
+    console.log(props);
     //Probably don't need this
     const [formState, setFormState] = useState({
         creator: '',
@@ -43,6 +45,9 @@ export default function RecipeNew(props) {
             submit()
         } else {
             bool.current = true;
+        }
+        if(amount || ingred){
+            
         }
         }, [subTime]);
 
@@ -118,17 +123,21 @@ export default function RecipeNew(props) {
     async function submit(){
         bool.current = false;
         setSubTime(false);
-        createRecipe(submitForm);
-        setFormState({
-            creator: '',
-            access: '',
-            name: '',
-            ingredients: [{ amount: '', ingred: '' }],
-            steps: []
-        });
-        setSubmitForm({});
-       
-        navigate('/home');
+        createRecipe(submitForm).then((value) => {
+            console.log("value")
+            console.log(value)
+            props.setUpdate(true);
+            setFormState({
+                creator: '',
+                access: '',
+                name: '',
+                ingredients: [{ amount: '', ingred: '' }],
+                steps: []
+            });
+            setSubmitForm({});
+
+            navigate('/');
+        })
     }
 
     function handleChange(event) {
@@ -275,4 +284,4 @@ export default function RecipeNew(props) {
             </div>
         </div>
     );
-}
+})

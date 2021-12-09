@@ -1,14 +1,12 @@
 import { Routes, Route} from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useState, useEffect } from 'react';
 
 
 import './App.scss';
 
 //Pages
 import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Home from './pages/Home';
+import Index from './pages/Index';
 import UserRecipes from './pages/UserRecipes';
 import RecipeNew from './pages/RecipeNew';
 import Show from './pages/Show';
@@ -22,19 +20,33 @@ import { getProfile } from './services/profileServices';
 
 
 function App() {
-  const navigate = useNavigate();
 
   const [userState, setUserState] = useState({user: getUser()});
   const [profile, setProfile] = useState();
+  const [update, setUpdate] = useState(false);
 
-  useEffect(async () => {
-    if(userState.user){
-      console.log(userState);
-      if(!profile){
-        setProfile(await getProfile(userState.user.profile));
+  useEffect(() => {
+    const checkProfile = async () => {
+      if(userState.user){
+        console.log('------------------');
+        console.log(update);
+        
+        
+        if(!profile){
+          console.log('updating profile');
+          setProfile(await getProfile(userState.user.profile));
+        } else if (update === true){
+          console.log('updating profile');
+          setUpdate(false);
+          setProfile(await getProfile(userState.user.profile));
+        }
       }
     }
-  }, []);
+    checkProfile();
+  }, [update]);
+
+  
+
 
   function handleSignupOrLogin(){
     setUserState({user: getUser()});
@@ -51,14 +63,18 @@ function App() {
       <NavBar handleLogout={handleLogout} user={userState}/>
       <Routes>
         <Route path="/" element={
-            <Login handleSignupOrLogin={handleSignupOrLogin} />}
+            <Index 
+                  userState={userState}
+                  handleSignupOrLogin={handleSignupOrLogin}
+                  profile={profile}
+            />}
         />
         
         <Route path="/signup" element={
             <Signup handleSignupOrLogin={handleSignupOrLogin}/>}
         />
 
-        <Route path='/home' element={<Home />} />
+        {/* <Route path='/home' element={<Home profile={profile}/>} /> */}
         <Route path='/recipes' element={
             <UserRecipes  profile={profile}
                           setProfile={setProfile}
@@ -69,6 +85,8 @@ function App() {
             <RecipeNew  user={userState} 
                         profile={profile}
                         setProfile={setProfile}
+                        update={update}
+                        setUpdate={setUpdate}
             />}
         />
 

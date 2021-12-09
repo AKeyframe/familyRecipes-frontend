@@ -11,7 +11,13 @@ async function getProfile(id){
     return data;
 }
 
+const getProfileRecipes = async (id) => {
+    const response = await fetch(URL+'/'+id+'/recipes');
+    const data = await response.json();
+    return (data);
+  };
 
 export {
    getProfile,
+   getProfileRecipes,
 }

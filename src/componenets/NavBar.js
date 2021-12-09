@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 
 
 const NavBar = (props) => {
-    console.log(props.user);
     let nav = props.user.user ?
         <div className='nav'>
-            <Link to='/home'><h2>The Family Table</h2></Link>
+            <Link to='/'><h2>The Family Table</h2></Link>
             <form>
                 <input type="text" name='search' placeholder='Search Recipes (WIP)' />
             </form>

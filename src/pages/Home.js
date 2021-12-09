@@ -1,9 +1,10 @@
 import {Link} from 'react-router-dom';
 
-import RecipeResults from '../componenets/RecipeResults';
+//import RecipeResults from '../componenets/RecipeResults';
+import UserRecipes from './UserRecipes';
 
 export default function Home(props){
-
+    console.log(props.profile);
 
     return(
         <div className='indexPage'>
@@ -26,7 +27,9 @@ export default function Home(props){
                     </div>
                 </Link>
 
-               
+               <UserRecipes profile={props.profile}
+                            setProfile={props.profile}
+                />
             
             </div>
         </div>
