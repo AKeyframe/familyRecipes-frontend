@@ -4,7 +4,9 @@ import Login from "./Login";
 export default function Index(props){
     return( props.userState.user ? 
         <div>
-            <Home profile={props.profile}/>
+            <Home   profile={props.profile}
+                    focusRecipe={props.focusRecipe}
+                    setFocusRecipe={props.setFocusRecipe}/>
         </div>
         :
         <div>

@@ -13,6 +13,12 @@ const createFamily = async (data) => {
     })
 }
 
+const getOneFamily = async (id) => {
+    const response = await fetch(URL+'/'+id);
+    const data = await response.json();
+    return data;
+}
+
 const getFamilyRecipes = async (id) => {
     const response = await fetch(URL+'/'+id+'/recipes');
     const data = await response.json();
@@ -43,5 +49,6 @@ export {
     createFamily,
     deleteFamily,
     changeHead,
+    getOneFamily,
     getFamilyRecipes
 }

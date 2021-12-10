@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 //Services
-import { getProfileFamilies } from "../services/profileServices";
+import { getProfile, getProfileFamilies } from "../services/profileServices";
 
 export default function Families(props){
 
@@ -15,8 +15,18 @@ export default function Families(props){
             setFamilies(await getProfileFamilies(props.profile._id));
         }
 
-        getFamilies();
-    }, []);
+        const getUserProfile = async () => {
+            props.setProfile(await getProfile(props.userState.user.profile)); 
+        }
+
+        if(props.profile){
+            getFamilies();
+
+            //if the user Refreshed
+        } else {
+            getUserProfile();
+        }
+    }, [props.profile]);
 
     function handleClick(fam){
         props.setFocusFamily(fam);

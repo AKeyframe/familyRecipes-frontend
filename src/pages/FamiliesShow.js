@@ -1,8 +1,24 @@
 import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 
+//Services
+import { getOneFamily } from "../services/familyServices";
 
 export default function FamiliesShow(props){
     console.log(props.focusFamily);
+
+    const params = useParams();
+
+    const updateFocusFamily = async () => {
+        props.setFocusFamily(await getOneFamily(params.id));
+    }
+
+    if(!props.focusFamily){
+        updateFocusFamily();
+
+        return <h1>loading...</h1>
+    } else {
+
         return(
             <div>
                 <h1>Families Show Page</h1>
@@ -18,5 +34,5 @@ export default function FamiliesShow(props){
             </div>
             
         );
-  
+    }
 }

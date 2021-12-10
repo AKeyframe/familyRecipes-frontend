@@ -24,9 +24,6 @@ import { getProfile } from './services/profileServices';
 
 
 
-
-
-
 function App() {
 
   const [userState, setUserState] = useState({user: getUser()});
@@ -34,19 +31,15 @@ function App() {
   const [update, setUpdate] = useState(false);
 
   const [focusFamily, setFocusFamily] = useState(null);
+  const [focusRecipe, setFocusRecipe] = useState(null);
 
   useEffect(() => {
     const checkProfile = async () => {
-      if(userState.user){
-        console.log('------------------');
-        console.log(update);
-        
-        
+      if(userState.user){        
         if(!profile){
-          console.log('updating profile');
           setProfile(await getProfile(userState.user.profile));
+
         } else if (update === true){
-          console.log('updating profile');
           setUpdate(false);
           setProfile(await getProfile(userState.user.profile));
         }
@@ -55,12 +48,9 @@ function App() {
     checkProfile();
   }, [update]);
 
-  
-
 
   function handleSignupOrLogin(){
     setUserState({user: getUser()});
-    
   }
   
   function handleLogout(){
@@ -77,6 +67,8 @@ function App() {
                   userState={userState}
                   handleSignupOrLogin={handleSignupOrLogin}
                   profile={profile}
+                  focusRecipe={focusRecipe}
+                  setFocusRecipe={setFocusRecipe}
             />}
         />
         
@@ -84,10 +76,11 @@ function App() {
             <Signup handleSignupOrLogin={handleSignupOrLogin}/>}
         />
 
-        {/* <Route path='/home' element={<Home profile={profile}/>} /> */}
         <Route path='/recipes' element={
             <UserRecipes  profile={profile}
                           setProfile={setProfile}
+                          focusRecipe={focusRecipe}
+                          setFocusRecipe={setFocusRecipe}
             />} 
         />
         
@@ -101,13 +94,16 @@ function App() {
         />
 
         <Route path='/recipes/:id' element={ 
-            <RecipeShow />} 
+            <RecipeShow focusRecipe={focusRecipe}
+                        setFocusRecipe={setFocusRecipe}/>} 
         />
 
         <Route path='/families' element={
             <Families profile={profile}
+                      setProfile={setProfile}
                       focusFamily={focusFamily}
-                      setFocusFamily={setFocusFamily}/>}
+                      setFocusFamily={setFocusFamily}
+                      userState={userState}/>}
         />
 
         <Route path='/families/new' element={

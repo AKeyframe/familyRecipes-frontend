@@ -1,24 +1,16 @@
 import {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { getOneRecipe, deleteRecipe } from "../services/recipeService";
+import {deleteRecipe, getOneRecipe} from "../services/recipeService";
 
-export default function Show(props){
-
-    const [recipe, setRecipe] = useState(null);
-
+export default function RecipeShow(props){
+    console.log(props.focusRecipe);
     const params = useParams();
     const navigate = useNavigate();
 
-    async function updateRecipe() {
-        setRecipe(await getOneRecipe(params.id));
-        
-    }
-
-    useEffect(() => updateRecipe(), []);
-    console.log(props);
+   
     async function handleSubmit(){
-        deleteRecipe(await params.id);
+        deleteRecipe(params.id);
         navigate('/');
     }
 
@@ -30,44 +22,32 @@ export default function Show(props){
                     <button>Delete Recipe</button>
                 </form>
                 <div className='show background'>
-                    <h1>{recipe.name}</h1>
+                    <h1>{props.focusRecipe.name}</h1>
                     
                     <div className='ingredientsList'>
-                        <div className='amounts'>
-                            <div className='amHead'>
-                                <h4>Amount</h4>
-                            </div>
-                            {recipe.ingredients.map((ing, i) => {
-                                console.log(ing)
-                                return(
-                                        <div className='amount' key={i}>
-                                            <p>{ing.amount}</p>
-                                        </div>
-                                );
-                            })}
-                        </div>
-
-                        <div className='ingredients'>
-                            <div className='ingHead'>
-                                <h4>Ingredient</h4>
-                            </div>
-                            {recipe.ingredients.map((ing, i) => {
-                                console.log(ing)
-                                return(
-                                        <div className='ingred' key={i}>
-                                            <p>{ing.ingred}</p>
-                                        </div>
-                                );
-                            })}
-                        </div>
-                        
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Ingredient</th>
+                                </tr>
+                                {props.focusRecipe.ingredients.map((ing, i) =>{
+                                    return(
+                                        <tr key={i}>
+                                            <td>{ing.amount}</td>
+                                            <td>{ing.ingred}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>                        
                     </div>
                     <div className='instructions'>
                         <h3>Instructions</h3>
                     </div>
 
                     <div className='stepsList'>
-                            {recipe.steps.map((step, i) => {
+                            {props.focusRecipe.steps.map((step, i) => {
                                 return(
                                     <div className='step' key={i}>
                                         <p><strong>{i+1}: </strong>{step}</p>
@@ -80,11 +60,21 @@ export default function Show(props){
             </div>
         );
     };
+    
+    const getTheRecipe = async () => {
+        props.setFocusRecipe(await getOneRecipe(params.id));
+    }
 
     const loading = () => {
+        //This if is for when the user refreshes the page
+        if(!props.profile){
+            getTheRecipe();
+            console.log(props.profile);
+        }
+        
         return <h1>Loading...</h1>;
     };
 
 
-    return recipe ? loaded() : loading();
+    return props.focusRecipe ? loaded() : loading();
 }

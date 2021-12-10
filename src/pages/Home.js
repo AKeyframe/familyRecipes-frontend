@@ -29,6 +29,8 @@ export default function Home(props){
 
                <UserRecipes profile={props.profile}
                             setProfile={props.profile}
+                            focusRecipe={props.focusRecipe}
+                            setFocusRecipe={props.setFocusRecipe}
                 />
 
                 <Link to='/families/new'>

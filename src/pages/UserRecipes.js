@@ -1,8 +1,18 @@
 //import { useState } from "react";
+import { useNavigate } from 'react-router';
 
 import '../App.scss';
 
 export default function UserRecipes(props){
+
+    const navigate = useNavigate();
+
+    const handleClick = (r) => {
+        props.setFocusRecipe(r);
+        navigate(`/recipes/${r._id}`);
+    }
+
+
     if(props.profile){
         if(props.profile.recipes){
             return(
@@ -11,7 +21,7 @@ export default function UserRecipes(props){
                         
                     return(
                             <div key={i}>
-                                <h1>{r.name}</h1>
+                                <h1 onClick={() => handleClick(r)}>{r.name}</h1>
                             </div>
                     );  
                     })}
