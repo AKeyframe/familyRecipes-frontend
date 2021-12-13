@@ -1,7 +1,10 @@
 import {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import {deleteRecipe, getOneRecipe} from "../services/recipeService";
+
+//Services
+import { deleteRecipe, getOneRecipe } from "../services/recipeService";
+import { FavoriteARecipe } from '../services/profileServices';
 
 export default function RecipeShow(props){
     console.log(props.focusRecipe);
@@ -14,6 +17,14 @@ export default function RecipeShow(props){
         navigate('/');
     }
 
+    const handleFavorite = async () => {
+        await FavoriteARecipe(props.userState.user.profile, params.id).then(() => {
+            props.setUpdate(true);
+        });
+
+        //Replace with ux feedback
+        console.log('favorited!')
+    }
 
     const loaded = () => {
         return(
@@ -21,6 +32,9 @@ export default function RecipeShow(props){
                 <form onSubmit={handleSubmit}>
                     <button>Delete Recipe</button>
                 </form>
+                <div onClick={handleFavorite} className='button'>
+                    <p>Favorite</p>
+                </div>
                 <div className='show background'>
                     <h1>{props.focusRecipe.name}</h1>
                     

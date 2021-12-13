@@ -10,6 +10,9 @@ import Index from './pages/Index';
 import UserRecipes from './pages/UserRecipes';
 import RecipeNew from './pages/RecipeNew';
 import RecipeShow from './pages/RecipeShow';
+import Favorites from './pages/Favorites';
+
+import Requests from './pages/Requests';
 import FamilyNew from './pages/FamilyNew';
 import Families from './pages/Families';
 import FamiliesShow from './pages/FamiliesShow';
@@ -21,6 +24,8 @@ import NavBar from './componenets/NavBar';
 //Services
 import { getUser, logout } from './services/userService';
 import { getProfile } from './services/profileServices';
+
+
 
 
 
@@ -46,7 +51,7 @@ function App() {
       }
     }
     checkProfile();
-  }, [update]);
+  }, [userState.user, update]);
 
 
   function handleSignupOrLogin(){
@@ -56,6 +61,11 @@ function App() {
   function handleLogout(){
     logout(); //userService
     setUserState({user: null});
+    setProfile(null);
+    setUpdate(false);
+    setFocusRecipe(null);
+    setFocusFamily(null);
+    
   }
 
   return (
@@ -95,7 +105,25 @@ function App() {
 
         <Route path='/recipes/:id' element={ 
             <RecipeShow focusRecipe={focusRecipe}
-                        setFocusRecipe={setFocusRecipe}/>} 
+                        setFocusRecipe={setFocusRecipe}
+                        userState={userState}
+                        setUpdate={setUpdate}/>} 
+        />
+
+        <Route path='/favorites' element={
+            <Favorites  profile={profile}
+                        setProfile={setProfile}
+                        focusRecipe={setFocusRecipe}
+                        setFocusRecipe={setFocusRecipe}
+                        userState={userState}/>}
+        />
+
+        <Route path='/requests' element={
+            <Requests profile={profile}
+                      setProfile={setProfile}
+                      userState={userState}
+                      focusFamily={focusFamily}
+                      setFocusFamily={setFocusFamily}/>}
         />
 
         <Route path='/families' element={
@@ -117,7 +145,9 @@ function App() {
 
         <Route path='/families/:id/recipes' element={
             <FamilyRecipes  focusFamily={focusFamily}
-                            setFocusFamily={setFocusFamily}/>}
+                            setFocusFamily={setFocusFamily}
+                            focusRecipe={focusRecipe}
+                            setFocusRecipe={setFocusRecipe}/>}
         />
 
       </Routes>

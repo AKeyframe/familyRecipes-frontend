@@ -44,7 +44,18 @@ export default function Home(props){
                         <p style={{fontSize: "13px"}}>Your Family's Tables</p>
                     </div>
                 </Link>
-            
+
+                <Link to='/favorites'>
+                    <div className='button'>
+                        <p>Favorites</p>
+                    </div>
+                </Link>
+
+                <Link to='/requests'>
+                    <div className='button'>
+                        <p>Requests</p>
+                    </div>
+                </Link>
             </div>
         </div>
     );

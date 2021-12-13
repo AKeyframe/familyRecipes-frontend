@@ -124,8 +124,6 @@ export default forwardRef(function RecipeNew (props, ref) {
         bool.current = false;
         setSubTime(false);
         createRecipe(submitForm).then((value) => {
-            console.log("value")
-            console.log(value)
             props.setUpdate(true);
             setFormState({
                 creator: '',

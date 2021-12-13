@@ -17,7 +17,7 @@ const getProfileRecipes = async (id) => {
     return (data);
   };
 
-const getProfileFamilies = async (id) =>{
+const getProfileFamilies = async (id) => {
     const response = await fetch(URL+'/'+id+'/families');
     const data = await response.json();
     console.log('Families');
@@ -25,8 +25,43 @@ const getProfileFamilies = async (id) =>{
     return data;
 }
 
+const FavoriteARecipe = async (profId, id) => {
+    const data = {id: id}
+    await fetch(URL + '/' + profId + '/favorite', {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(data),
+    });
+}
+
+const sendFamilyRequest = async (username, id) => {
+    const data = {reqType: 'family', from: id, seen: false}
+    await fetch(URL+'/'+username+'/recieve-request', {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(data),
+    });
+}
+
+const acceptOrDeclineFamilyReq = async (data) => {
+    await fetch(URL+'/request/'+data.profID, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(data),
+    });
+}
+
 export {
    getProfile,
    getProfileRecipes,
    getProfileFamilies,
+   FavoriteARecipe,
+   sendFamilyRequest,
+   acceptOrDeclineFamilyReq
 }
