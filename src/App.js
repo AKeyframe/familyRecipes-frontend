@@ -7,9 +7,11 @@ import './App.scss';
 //Pages
 import Signup from './pages/Signup';
 import Index from './pages/Index';
+import Profile from './pages/Profile';
 import UserRecipes from './pages/UserRecipes';
 import RecipeNew from './pages/RecipeNew';
 import RecipeShow from './pages/RecipeShow';
+import RecipeEdit from './pages/RecipeEdit';
 import Favorites from './pages/Favorites';
 
 import Requests from './pages/Requests';
@@ -24,6 +26,8 @@ import NavBar from './componenets/NavBar';
 //Services
 import { getUser, logout } from './services/userService';
 import { getProfile } from './services/profileServices';
+
+
 
 
 
@@ -85,6 +89,14 @@ function App() {
         <Route path="/signup" element={
             <Signup handleSignupOrLogin={handleSignupOrLogin}/>}
         />
+        
+        <Route path='/profile' element={
+            <Profile  profile={profile}
+                      setProfile={setProfile}
+                      userState={userState}
+                      handleLogout={handleLogout}
+            />}
+        />
 
         <Route path='/recipes' element={
             <UserRecipes  profile={profile}
@@ -103,10 +115,20 @@ function App() {
             />}
         />
 
+        <Route path='/recipes/edit' element={
+            <RecipeEdit profile={profile}
+                        setProfile={setProfile}
+                        focusRecipe={focusRecipe}
+                        setFocusRecipe={setFocusRecipe} 
+            />}
+        />
+
         <Route path='/recipes/:id' element={ 
             <RecipeShow focusRecipe={focusRecipe}
                         setFocusRecipe={setFocusRecipe}
                         userState={userState}
+                        profile={profile}
+                        setProfile={setProfile}
                         setUpdate={setUpdate}/>} 
         />
 

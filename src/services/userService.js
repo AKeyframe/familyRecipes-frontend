@@ -3,7 +3,7 @@ import { setToken, getUserFromToken, removeToken } from './tokenService';
 //const URL = 'https://the-family-table.herokuapp.com/users/'
 const URL = "http://localhost:4000/users/";
 
-function signup(user) {
+async function signup(user) {
   return fetch(URL + 'signup', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -22,7 +22,7 @@ function getUser(){
     return getUserFromToken();
 }
 
-function login(creds){
+async function login(creds){
     return fetch(URL+'login', {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json'}), //Authorization: `bearer `,
@@ -40,9 +40,16 @@ function logout(){
     removeToken(); //tokenServices
 }
 
+async function deleteUser(id){
+    await fetch(URL+'/'+id, {
+      method: "DELETE",
+    });
+}
+
 export {
     signup,
     login,
     logout,
-    getUser
+    getUser,
+    deleteUser
   }

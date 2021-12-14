@@ -27,22 +27,36 @@ export default function Requests(props) {
         navigate(`/families/${req._id}`);
     }
 
-    const handleAccept = (id) => {
+    const handleAccept = async (req) => {
         console.log('accepted');
-        console.log(id)
-        const data = {dec: 'accept', reqID: id, profID: props.profile._id}
-    
-        //props.setFocusFamily(req.from);
-        //navigate(`/families/${req.from._id}`);
+        console.log(req._id)
+        const data = {  dec: 'accept', 
+                        famID: req.from._id,
+                        reqID: req._id, 
+                        profID: props.profile._id
+                    };
+        
+
+        await acceptOrDeclineFamilyReq(data).then(() => {
+            updateProfile();
+            props.setFocusFamily(req.from);
+            navigate(`/families/${req.from._id}`);
+        });
+        
     }
 
     const handleDecline = async (req) => {
         console.log('declined');
         console.log(req._id)
-        const data = {dec: 'decline', reqID: req._id, profID: props.profile._id}
+        const data = {  dec: 'decline', 
+                        famID: req.from._id,
+                        reqID: req._id, 
+                        profID: props.profile._id
+                    };
+
         await acceptOrDeclineFamilyReq(data).then(() => {
             updateProfile();
-        })
+        });
     }
 
 

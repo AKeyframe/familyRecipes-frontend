@@ -21,41 +21,58 @@ export default function Home(props){
                     Temp Dev Page
                 </h1>
 
-                <Link to='/recipes'>
-                    <div className='button'>
-                        <p>User Recipes</p>
-                    </div>
-                </Link>
+                <div>
+                    <Link to='/recipes'>
+                        <div className='button'>
+                            <p>User Recipes</p>
+                        </div>
+                    </Link>
+                </div>
 
                <UserRecipes profile={props.profile}
                             setProfile={props.profile}
                             focusRecipe={props.focusRecipe}
                             setFocusRecipe={props.setFocusRecipe}
                 />
+                <div>
+                    <Link to='/families/new'>
+                        <div className='button'>
+                            <p style={{fontSize: "13px"}}>New Family Table</p>
+                        </div>
+                    </Link>
+                </div>
+                
+                <div>
+                    <Link to='/families'>
+                        <div className= 'button'>
+                            <p style={{fontSize: "13px"}}>Your Family's Tables</p>
+                        </div>
+                    </Link>
+                </div>
 
-                <Link to='/families/new'>
-                    <div className='button'>
-                        <p style={{fontSize: "13px"}}>New Family Table</p>
-                    </div>
-                </Link>
+                <div>
+                    <Link to='/favorites'>
+                        <div className='button'>
+                            <p>Favorites</p>
+                        </div>
+                    </Link>
+                </div>
 
-                <Link to='/families'>
-                    <div className= 'button'>
-                        <p style={{fontSize: "13px"}}>Your Family's Tables</p>
-                    </div>
-                </Link>
+                <div>
+                    <Link to='/requests'>
+                        <div className='button'>
+                            <p>Requests</p>
+                        </div>
+                    </Link>
+                </div>
 
-                <Link to='/favorites'>
-                    <div className='button'>
-                        <p>Favorites</p>
-                    </div>
-                </Link>
-
-                <Link to='/requests'>
-                    <div className='button'>
-                        <p>Requests</p>
-                    </div>
-                </Link>
+                <div>
+                    <Link to='/profile'>
+                        <div className='button'>
+                            <p>Profile</p>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     );

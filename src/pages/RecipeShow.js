@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 //Services
 import { deleteRecipe, getOneRecipe } from "../services/recipeService";
-import { FavoriteARecipe } from '../services/profileServices';
+import { getProfile, FavoriteARecipe } from '../services/profileServices';
 
 export default function RecipeShow(props){
     console.log(props.focusRecipe);
@@ -14,7 +14,13 @@ export default function RecipeShow(props){
    
     async function handleSubmit(){
         deleteRecipe(params.id);
-        navigate('/');
+        navigate("/");
+        props.setProfile(await getProfile(props.userState.user.profile));
+        
+    }
+
+    const goBack = () => {
+        navigate(-1);
     }
 
     const handleFavorite = async () => {
@@ -26,12 +32,23 @@ export default function RecipeShow(props){
         console.log('favorited!')
     }
 
+    const handleEdit = () => {
+        navigate('/recipes/edit');
+    }
+
     const loaded = () => {
         return(
             <div className='showPage'>
-                <form onSubmit={handleSubmit}>
-                    <button>Delete Recipe</button>
-                </form>
+                <div onClick={goBack} className='button'>
+                    <p>Back</p>
+                </div>
+                    <form onSubmit={handleSubmit}>
+                        <button>Delete Recipe</button>
+                    </form>
+
+                    <div onClick={handleEdit}className='button'>
+                        <p>Edit Recipe</p>
+                    </div>
                 <div onClick={handleFavorite} className='button'>
                     <p>Favorite</p>
                 </div>

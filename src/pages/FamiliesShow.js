@@ -45,7 +45,14 @@ export default function FamiliesShow(props){
                 </div>
                 <h1>{props.focusFamily.name}</h1>
                 <h2>Memebers</h2>
-                <p>{props.focusFamily.members[0]}</p>
+                {props.focusFamily.members.map((mem, i) => {
+                    return(
+                        <div key={i}>
+                            <p>{mem}</p>
+                        </div>
+                    );
+                })}
+                
 
                 <Link to={`/families/${props.focusFamily._id}/recipes`}>
                         <div className= 'button'>

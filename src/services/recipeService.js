@@ -28,9 +28,15 @@ const createRecipe = async (recipe) => {
     
 };
 
-const deleteRecipe = async (recipe) => {
-    console.log(recipe);
+const deleteRecipe = async (id) => {
+    await fetch(URL+'/'+id, {
+        method: "DELETE",
+    });
     
+}
+
+const updateRecipe = async (data) => {
+    console.log(data);
 }
 
 
@@ -39,5 +45,6 @@ export {
     getRecipes,
     getOneRecipe,
     createRecipe,
-    deleteRecipe
+    deleteRecipe,
+    updateRecipe
 }

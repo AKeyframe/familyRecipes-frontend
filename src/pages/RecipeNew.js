@@ -7,7 +7,8 @@ import StepInput from '../componenets/StepInput';
 
 
 export default forwardRef(function RecipeNew (props, ref) {
-    console.log(props);
+    //Eventually want to rewrite this.
+
     //Probably don't need this
     const [formState, setFormState] = useState({
         creator: '',
