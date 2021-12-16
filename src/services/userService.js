@@ -41,7 +41,7 @@ function logout(){
 }
 
 async function deleteUser(id){
-    await fetch(URL+'/'+id, {
+    await fetch(URL+id, {
       method: "DELETE",
     });
 }

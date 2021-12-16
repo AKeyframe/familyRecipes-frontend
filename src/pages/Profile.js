@@ -8,8 +8,9 @@ export default function Profile(props){
 
     const handleDelete = async () => {
         await deleteUser(props.userState.user._id).then(() => {
-            props.handleLogout();
             navigate('/');
+            props.handleLogout();
+            
         });
     }
 

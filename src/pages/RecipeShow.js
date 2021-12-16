@@ -21,6 +21,7 @@ export default function RecipeShow(props){
 
     const goBack = () => {
         navigate(-1);
+        navigate(-1);
     }
 
     const handleFavorite = async () => {
