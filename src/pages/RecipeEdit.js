@@ -10,37 +10,44 @@ import StepInput from '../componenets/StepInput';
 import { getOneRecipe, updateRecipe } from "../services/recipeService";
 
 export default function RecipeEdit(props){
+    //The code is still wonky cause of how I originally did it but this 
+    //is a lot cleaner then the recipe new page's nested setStates that I 
+    //originally did when first learning react. 
 
     const [first, setFirst] = useState(false);
-    const [rend, setRend] = useState(false);
 
-    const [subData, setSubData] = useState({});
-    const [numOfI, setNumOfI] = useState();
-    const [numOfSteps, setNumOfSteps] = useState();
+    const [numOfI, setNumOfI] = useState(); //Input fields for Amount / Ingred
+    const [numOfSteps, setNumOfSteps] = useState(); //Input fields for Steps
 
-    const [amount, setAmount] = useState([]);
-    const [ingred, setIngred] = useState([]);
-    const [steps, setSteps] = useState();
+    const [name, setName] = useState(); //Recipe name input state
+    const [amount, setAmount] = useState([]); //Values for amount input fields
+    const [ingred, setIngred] = useState([]); //Values for ingred input fields
+    const [steps, setSteps] = useState(); //Values for step input fiedls
     
     const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
+        //If the page was loaded set the inital states
         if(props.focusRecipe && first !== true){
+            setName(props.focusRecipe.name);
             importIngred();
             importSteps();
         }
-        console.log(amount)
-        console.log(ingred)
+
+        //If the states have been set render the inputs
         if(amount.length > 0 && ingred.length > 0){
             renderIngredients();
             renderSteps();
        } 
 
-    }, [props.focusRecipe, amount, ingred, rend, steps]);
+    }, [props.focusRecipe, amount, ingred, steps]);
 
 
-
+//===========================================================
+//                   Import / Render
+//===========================================================
+    //setAmount and setIngred
     function importIngred(){
         let setA = [];
         let setI = [];
@@ -53,6 +60,7 @@ export default function RecipeEdit(props){
         setIngred(setI);
     }
 
+    //setSteps
     function importSteps(){
         let stepsArray = [];
         props.focusRecipe.steps.forEach((step, i) => {
@@ -221,6 +229,10 @@ export default function RecipeEdit(props){
         if(!first) setFirst(true);
     }
 
+//===========================================================
+//                         handles
+//===========================================================
+
     function handleChange(event){
         let type = (event.target.name).split(' ')[0];
         let pos = event.target.name.split(' ')[1];
@@ -250,6 +262,10 @@ export default function RecipeEdit(props){
                 array[pos] = event.target.value;
                 return array;
             });
+        }
+
+        if(event.target.name === 'recipeName'){
+            setName(event.target.value)
         }
     }
 
@@ -321,25 +337,53 @@ export default function RecipeEdit(props){
         });
     }
 
-    function handleSubmit(){
+    function handleSubmit(event){
+        event.preventDefault();
 
+        let am = [...amount];
+        let ing = [...ingred];
+        let stepsArray = [...steps];
+        let filteredSteps = [];
+        let ingredientsArray = [];
+
+        for(let i = 0; i < amount.length; i++){
+            if(am[i] !== '' && ing[i] !== ''){
+                ingredientsArray.push(
+                    {
+                        amount: am[i],
+                        ingred: ing[i]
+                });
+            }
+        }
+
+        stepsArray.forEach((s, i) => {
+            if(s !== ''){
+                filteredSteps.push(s);
+            }
+        });
+
+
+        let data = {
+            name: name,
+            ingredients: [...ingredientsArray],
+            steps: [...filteredSteps]
+        };
+      
+
+        updateRecipe(data, params.id).then(async () => {
+            setFirst(false);
+
+            props.setFocusRecipe(await getOneRecipe(params.id));
+            navigate(`/recipes/${params.id}`);
+        });
     }
+
+//===========================================================
+//                     Essentials / Return
+//===========================================================
 
     const goBack = () => {
         navigate(-1);
-    }
-
-    const log = () => {
-        console.log('Amount')
-        console.log(amount)
-        console.log('Ingred')
-        console.log(ingred)
-        console.log('numOfI')
-        console.log(numOfI);
-        console.log('steps')
-        console.log(steps);
-        console.log('first')
-        console.log(first)
     }
 
     async function update(){
@@ -353,15 +397,15 @@ export default function RecipeEdit(props){
                 <div onClick={goBack} className='button'>
                     <p>Back</p>
                 </div>
-
-                <div onClick={log}className='button'>
-                    <p>Click for log</p>
-                </div>
                 
                 <div className='background new'>
                     <form> {/*onSubmit={handleSubmit}*/}
                         <div className='ingred'>
-                            
+                            <input type='text' name='recipeName'
+                                   placeholder='Recipe Name'
+                                   value={name} 
+                                   onChange={handleChange}
+                            />
 
                             {numOfI}
 
@@ -371,7 +415,7 @@ export default function RecipeEdit(props){
                         {numOfSteps}
                         
                         <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
-                        <button>Submit</button>
+                        <button onClick={handleSubmit}>Submit</button>
                     </form>
                 </div>
             </div>

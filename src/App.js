@@ -119,7 +119,8 @@ function App() {
             <RecipeEdit profile={profile}
                         setProfile={setProfile}
                         focusRecipe={focusRecipe}
-                        setFocusRecipe={setFocusRecipe} 
+                        setFocusRecipe={setFocusRecipe}
+                        setUpdate={setUpdate} 
             />}
         />
 
