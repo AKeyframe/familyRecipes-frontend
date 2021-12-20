@@ -30,6 +30,8 @@ export default function RecipeEdit(props){
             importIngred();
             importSteps();
         }
+        console.log(amount)
+        console.log(ingred)
         if(amount.length > 0 && ingred.length > 0){
             renderIngredients();
             renderSteps();
@@ -62,61 +64,80 @@ export default function RecipeEdit(props){
     function renderIngredients(){
         let data = [];
        
-            console.log('innital ingred render')
-            props.focusRecipe.ingredients.forEach((ing, i) => {
-                if(i === 0){
-                    data.push(
-                        <IngredientInput 
-                            first={true}
-                            edit={true}
-                            pos={i}
-                            amValue={ing.amount}
-                            ingValue={ing.ingred}
-                            amount={amount}
-                            ingred={ingred}
-                            handleChange={handleChange}
-                            handleRemoveIngredient={handleRemoveIngredient}
-                            key={i}
-                        />
-                    );
-
-                } else{
-                    data.push(
-                        <IngredientInput 
-                            edit={true}
-                            pos={i}
-                            amValue={ing.amount}
-                            ingValue={ing.ingred}
-                            amount={amount}
-                            ingred={ingred}
-                            handleChange={handleChange}
-                            handleRemoveIngredient={handleRemoveIngredient}
-                            key={i}
-                        />
-                    );
-                }
-            });
-            console.log('=====================')
-            console.log(data)
-            
-            if(numOfI){
-                if(data.length !== numOfI.length){
-                    for(let i = data.length; i< numOfI.length; i++){
+            if(!first){
+                props.focusRecipe.ingredients.forEach((ing, i) => {
+                    if(i === 0){
                         data.push(
                             <IngredientInput 
+                                first={'true'}
                                 edit={true}
                                 pos={i}
-                                amValue={amount[i]}
-                                ingValue={ingred[i]}
+                                amValue={ing.amount}
+                                ingValue={ing.ingred}
                                 amount={amount}
                                 ingred={ingred}
                                 handleChange={handleChange}
                                 handleRemoveIngredient={handleRemoveIngredient}
                                 key={i}
-                            />);
+                            />
+                        );
+
+                    } else{
+                        data.push(
+                            <IngredientInput 
+                                edit={true}
+                                pos={i}
+                                amValue={ing.amount}
+                                ingValue={ing.ingred}
+                                amount={amount}
+                                ingred={ingred}
+                                handleChange={handleChange}
+                                handleRemoveIngredient={handleRemoveIngredient}
+                                key={i}
+                            />
+                        );
+                    }
+                });
+            } else {
+                if(numOfI){
+                    for(let i = 0; i< numOfI.length; i++){
+                        if(numOfI[i] !== ''){
+                            if(i === 0){
+                                data.push(
+                                    <IngredientInput
+                                        first={'true'} 
+                                        edit={true}
+                                        pos={i}
+                                        amValue={amount[i]}
+                                        ingValue={ingred[i]}
+                                        amount={amount}
+                                        ingred={ingred}
+                                        handleChange={handleChange}
+                                        handleRemoveIngredient={handleRemoveIngredient}
+                                        key={i}
+                                    />);
+                            } else {
+                                data.push(
+                                    <IngredientInput 
+                                        edit={true}
+                                        pos={i}
+                                        amValue={amount[i]}
+                                        ingValue={ingred[i]}
+                                        amount={amount}
+                                        ingred={ingred}
+                                        handleChange={handleChange}
+                                        handleRemoveIngredient={handleRemoveIngredient}
+                                        key={i}
+                                    />);
+                            }
+                            
+                        } else {
+                            data.push('');
+                        }
                     }
                 }
             }
+        
             console.log(data)
             setNumOfI(data);
          
@@ -124,36 +145,77 @@ export default function RecipeEdit(props){
 
     function renderSteps(){
         let data = [];
-        props.focusRecipe.steps.forEach((step, i) => {
-            if(i === 0){
-                data.push(
-                    <StepInput 
-                        first={true}
-                        edit={true}
-                        pos={i}
-                        stepValue={step}
-                        steps={steps}
-                        name={`step ${i}`}
-                        handleChange={handleChange}
-                        handleRemoveStep={handleRemoveStep}
-                        key={i}
-                    />
-                );
-            } else {
-                data.push(
-                    <StepInput 
-                        edit={true}
-                        pos={i}
-                        stepValue={step}
-                        steps={steps}
-                        name={`step ${i}`}
-                        handleChange={handleChange}
-                        handleRemoveStep={handleRemoveStep}
-                        key={i}
-                    />
-                );
+        if(!first){
+            props.focusRecipe.steps.forEach((step, i) => {
+                if(i === 0){
+                    data.push(
+                        <StepInput 
+                            first={'true'}
+                            edit={true}
+                            pos={i}
+                            stepValue={step}
+                            steps={steps}
+                            name={`step ${i}`}
+                            handleChange={handleChange}
+                            handleRemoveStep={handleRemoveStep}
+                            key={i}
+                        />
+                    );
+                } else {
+                    data.push(
+                        <StepInput 
+                            edit={true}
+                            pos={i}
+                            stepValue={step}
+                            steps={steps}
+                            name={`step ${i}`}
+                            handleChange={handleChange}
+                            handleRemoveStep={handleRemoveStep}
+                            key={i}
+                        />
+                    );
+                }
+            });
+        } else {
+            if(numOfSteps){
+                for(let i = 0; i<numOfSteps.length; i++){
+                    if(numOfSteps[i] !== ''){
+                        if(i === 0){
+                            data.push(
+                                <StepInput
+                                    first={'true'} 
+                                    edit={true}
+                                    pos={i}
+                                    stepValue={steps[i]}
+                                    steps={steps}
+                                    name={`step ${i}`}
+                                    handleChange={handleChange}
+                                    handleRemoveStep={handleRemoveStep}
+                                    key={i}
+                                />
+                            );
+
+
+                        } else {
+                            data.push(
+                                <StepInput 
+                                    edit={true}
+                                    pos={i}
+                                    stepValue={steps[i]}
+                                    steps={steps}
+                                    name={`step ${i}`}
+                                    handleChange={handleChange}
+                                    handleRemoveStep={handleRemoveStep}
+                                    key={i}
+                                />
+                            );
+                        }
+                    } else {
+                        data.push('');
+                    }
+                }
             }
-        });
+        }
 
         setNumOfSteps(data);
         if(!first) setFirst(true);
@@ -210,15 +272,53 @@ export default function RecipeEdit(props){
     }
 
     function handleAdditionalStep(){
-
+        setSteps(prev => [...prev, '']);
+        setNumOfSteps(prev => [...prev,
+            <StepInput 
+                edit={true}
+                pos={prev.length}
+                stepValue={''}
+                steps={steps}
+                name={`step ${prev.length}`}
+                handleChange={handleChange}
+                handleRemoveStep={handleRemoveStep}
+                key={prev.length}
+            />
+        ]);
     }
 
-    function handleRemoveIngredient(){
+    function handleRemoveIngredient(pos){
+        setNumOfI(prev => {
+            let array = [...prev];
+            array[pos] = '';
+            return array;
+        });
 
+        setAmount(prev => {
+            let array = [...prev];
+            array[pos] = '';
+            return array;
+        });
+
+        setIngred(prev => {
+            let array = [...prev];
+            array[pos] = '';
+            return array; 
+        });
     }
 
-    function handleRemoveStep(){
+    function handleRemoveStep(pos){
+        setNumOfSteps(prev => {
+            let array = [...prev];
+            array[pos] = '';
+            return array;
+        });
 
+        setSteps(prev => {
+            let array = [...prev];
+            array[pos] = '';
+            return array;
+        });
     }
 
     function handleSubmit(){
@@ -270,7 +370,7 @@ export default function RecipeEdit(props){
 
                         {numOfSteps}
                         
-                        {/* <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br /> */}
+                        <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
                         <button>Submit</button>
                     </form>
                 </div>
