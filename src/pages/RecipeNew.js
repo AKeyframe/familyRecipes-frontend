@@ -8,6 +8,7 @@ import StepInput from '../componenets/StepInput';
 
 export default forwardRef(function RecipeNew (props, ref) {
     //Eventually want to rewrite this.
+    //For anyone reading this, this was one of my first times really exporing  more than the basic use of state. So while the solution I came up with for what I was doing works, it's obviously not optimal. 
 
     //Probably don't need this
     const [formState, setFormState] = useState({
@@ -40,7 +41,6 @@ export default forwardRef(function RecipeNew (props, ref) {
     const [steps, setSteps] = useState([-1]);
 
     //Checks to see if ready to submit, 
-    //right now that just means you've clicked the submit button
     useEffect(() => {
         if(bool.current){
             submit()

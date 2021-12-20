@@ -115,7 +115,7 @@ function App() {
             />}
         />
 
-        <Route path='/recipes/edit' element={
+        <Route path='/recipes/:id/edit' element={
             <RecipeEdit profile={profile}
                         setProfile={setProfile}
                         focusRecipe={focusRecipe}

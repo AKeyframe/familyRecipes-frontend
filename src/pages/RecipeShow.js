@@ -34,7 +34,23 @@ export default function RecipeShow(props){
     }
 
     const handleEdit = () => {
-        navigate('/recipes/edit');
+        navigate(`/recipes/${params.id}/edit`);
+    }
+
+    const headers = () => {
+        if(props.focusRecipe.creator === props.profile._id){
+            return(
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <button>Delete Recipe</button>
+                    </form>
+
+                    <div onClick={handleEdit}className='button'>
+                        <p>Edit Recipe</p>
+                    </div>                    
+                </div>
+            );
+        }
     }
 
     const loaded = () => {
@@ -43,16 +59,12 @@ export default function RecipeShow(props){
                 <div onClick={goBack} className='button'>
                     <p>Back</p>
                 </div>
-                    <form onSubmit={handleSubmit}>
-                        <button>Delete Recipe</button>
-                    </form>
-
-                    <div onClick={handleEdit}className='button'>
-                        <p>Edit Recipe</p>
-                    </div>
+                {headers()}
+                
                 <div onClick={handleFavorite} className='button'>
-                    <p>Favorite</p>
+                        <p>Favorite</p>
                 </div>
+                
                 <div className='show background'>
                     <h1>{props.focusRecipe.name}</h1>
                     
@@ -93,14 +105,16 @@ export default function RecipeShow(props){
         );
     };
     
-    const getTheRecipe = async () => {
+    const getTheRequirements = async () => {
+        props.setProfile(await getProfile(props.userState.user.profile));
         props.setFocusRecipe(await getOneRecipe(params.id));
+        
     }
 
     const loading = () => {
         //This if is for when the user refreshes the page
         if(!props.profile){
-            getTheRecipe();
+            getTheRequirements();
             console.log(props.profile);
         }
         
