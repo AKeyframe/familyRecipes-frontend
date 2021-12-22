@@ -33,7 +33,7 @@ export default function Login(props) {
 
     return (
         <div className="loginPage">
-            <div className='background'>
+            <div className='login background'>
                 <h2>Log In</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -61,7 +61,7 @@ export default function Login(props) {
                             <button type="submit">Log In</button>&nbsp; &nbsp;
                         
                         </div>
-                        <div>
+                        <div className='inline'>
                             <p>Don't have an Account? </p>
                             <Link to='/signup'>Sign Up</Link>
                         </div>

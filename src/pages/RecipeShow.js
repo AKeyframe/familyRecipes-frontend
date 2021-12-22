@@ -21,7 +21,6 @@ export default function RecipeShow(props){
 
     const goBack = () => {
         navigate(-1);
-        navigate(-1);
     }
 
     const handleFavorite = async () => {
@@ -40,14 +39,36 @@ export default function RecipeShow(props){
     const headers = () => {
         if(props.focusRecipe.creator === props.profile._id){
             return(
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <button>Delete Recipe</button>
-                    </form>
+                <div className='navButtons'>
 
-                    <div onClick={handleEdit}className='button'>
-                        <p>Edit Recipe</p>
+                    <div onClick={goBack} className='button'>
+                        <p>Back</p>
+                    </div>
+
+                    <div onClick={handleFavorite} className='button'>
+                            <p>Favorite</p>
+                    </div>
+
+                    <div onSubmit={handleSubmit} className='button'>
+                        <p>Delete</p>
+                    </div>
+
+                    <div onClick={handleEdit} className='button'>
+                        <p>Edit</p>
                     </div>                    
+                </div>
+            );
+        } else {
+            return(
+                <div className='navButtons'>
+
+                    <div onClick={goBack} className='button'>
+                        <p>Back</p>
+                    </div>
+
+                    <div onClick={handleFavorite} className='button'>
+                            <p>Favorite</p>
+                    </div>       
                 </div>
             );
         }
@@ -56,15 +77,9 @@ export default function RecipeShow(props){
     const loaded = () => {
         return(
             <div className='showPage'>
-                <div onClick={goBack} className='button'>
-                    <p>Back</p>
-                </div>
+                
                 {headers()}
-                
-                <div onClick={handleFavorite} className='button'>
-                        <p>Favorite</p>
-                </div>
-                
+
                 <div className='show background'>
                     <h1>{props.focusRecipe.name}</h1>
                     

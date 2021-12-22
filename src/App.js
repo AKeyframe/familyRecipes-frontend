@@ -83,6 +83,8 @@ function App() {
                   profile={profile}
                   focusRecipe={focusRecipe}
                   setFocusRecipe={setFocusRecipe}
+                  focusFamily={focusFamily}
+                  setFocusFamily={setFocusFamily}
             />}
         />
         

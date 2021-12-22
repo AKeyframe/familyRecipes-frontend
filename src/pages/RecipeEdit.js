@@ -7,7 +7,11 @@ import IngredientInput from "../componenets/IngredientInput";
 import StepInput from '../componenets/StepInput';
 
 //Services
-import { getOneRecipe, updateRecipe } from "../services/recipeService";
+import { getOneRecipe, 
+         updateRecipe, 
+         deleteRecipe } from "../services/recipeService";
+
+import { getProfile } from '../services/profileServices';
 
 export default function RecipeEdit(props){
     //The code is still wonky cause of how I originally did it but this 
@@ -378,6 +382,12 @@ export default function RecipeEdit(props){
         });
     }
 
+    async function handleDelete(){
+        deleteRecipe(params.id);
+        navigate("/");
+        props.setProfile(await getProfile(props.userState.user.profile));
+    }
+
 //===========================================================
 //                     Essentials / Return
 //===========================================================
@@ -393,25 +403,38 @@ export default function RecipeEdit(props){
     if(props.focusRecipe){
         return(
             <div>
-                <h1>Edit Page</h1>
-                <div onClick={goBack} className='button'>
-                    <p>Back</p>
+                <div className='navButtons'>
+                    <div onClick={goBack} className='button'>
+                        <p>Back</p>
+                    </div>
+
+                    <div onClick={handleDelete} className='button'>
+                        <p>Delete</p>
+                    </div>
                 </div>
+                
                 
                 <div className='background new'>
                     <form> {/*onSubmit={handleSubmit}*/}
                         <div className='ingred'>
-                            <input type='text' name='recipeName'
-                                   placeholder='Recipe Name'
-                                   value={name} 
-                                   onChange={handleChange}
+                            <h1>Recipe Name</h1>
+                            <input  type='text' name='recipeName'
+                                    placeholder='Recipe Name'
+                                    value={name} 
+                                    onChange={handleChange}
+                                    className='rNameInput'
                             />
 
+                            <div id='editTH' className='inline'>
+                                <h3>Amount</h3>
+                                <h3>Ingredient</h3>
+                                <div style={{width: '60px'}}></div>
+                            </div>
                             {numOfI}
 
                             <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
                         </div>
-
+                        <h3>Instructions</h3>
                         {numOfSteps}
                         
                         <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />

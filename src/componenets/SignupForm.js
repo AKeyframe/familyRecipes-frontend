@@ -67,8 +67,11 @@ function SignupForm (props) {
             
               <div>
                 <button className="btn btn-default" disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-                <p>Already have an Account?</p>
-                <Link to='/'>Login</Link>
+                <div className='inline'>
+                  <p>Already have an Account?</p>
+                  <Link to='/'>Login</Link>
+                </div>
+                
               </div>
           </form>
         </div>

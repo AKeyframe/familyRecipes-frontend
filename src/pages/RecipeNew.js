@@ -1,14 +1,19 @@
 import {useState, useEffect, useRef, forwardRef} from 'react';
 import { useNavigate } from 'react-router';
-import { createRecipe } from '../services/recipeService';
-// import { getProfile } from '../services/profileServices';
+
+//Components
 import IngredientInput from '../componenets/IngredientInput';
 import StepInput from '../componenets/StepInput';
+import { getProfile } from '../services/profileServices';
+
+//Services
+import { createRecipe } from '../services/recipeService';
+// import { getProfile } from '../services/profileServices';
 
 
 export default forwardRef(function RecipeNew (props, ref) {
     //Eventually want to rewrite this.
-    //For anyone reading this, this was one of my first times really exporing  more than the basic use of state. So while the solution I came up with for what I was doing works, it's obviously not optimal. 
+    //For anyone reading this, this was one of my first times really exporing  more than the basic use of state. So while the solution I came up with for what I was doing works, it's obviously very messy. 
 
     //Probably don't need this
     const [formState, setFormState] = useState({
@@ -43,7 +48,7 @@ export default forwardRef(function RecipeNew (props, ref) {
     //Checks to see if ready to submit, 
     useEffect(() => {
         if(bool.current){
-            submit()
+            submit();
         } else {
             bool.current = true;
         }
@@ -260,27 +265,45 @@ export default forwardRef(function RecipeNew (props, ref) {
         })]);
     }
     
-    return (
-        <div className='recipeNewPage'>
-            <div className='background new'>
-                <form onSubmit={handleSubmit}>
-                    <div className='ingred'>
-                        <input type='hidden' name='creator' 
-                                value={props.profile._id} />
-                        <input type='text' name='recipeName'
-                            placeholder='Recipe Name' onChange={handleChange} />
+    async function updateProfile(){
+        props.setProfile(await getProfile(props.user.user.profile));
+    }
 
-                        {numOfI}
+    if(props.profile){
+        return (
+            <div className='recipeNewPage'>
+                <div className='background new'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='ingred'>
+                            <input type='hidden' name='creator' 
+                                    value={props.profile._id} />
+                            <h1>Recipe Name</h1>
+                            <input  className='rNameInput' type='text'
+                                    name='recipeName'                    placeholder='Recipe Name' 
+                                    onChange={handleChange} 
+                            />
 
-                        <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
-                    </div>
+                            <div id='editTH' className='inline'>
+                                <h3>Amount</h3>
+                                <h3>Ingredient</h3>
+                                <div style={{width: '60px'}}></div>
+                            </div>
+                            {numOfI}
 
-                    {numOfSteps}
-                    
-                    <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
-                    <button>Submit</button>
-                </form>
+                            <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
+                        </div>
+
+                        <h3>Instructions</h3>
+                        {numOfSteps}
+                        
+                        <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
+                        <button>Submit</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        updateProfile();
+        return(<h1>loading...</h1>)
+    }
 })

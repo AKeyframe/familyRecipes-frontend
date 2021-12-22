@@ -39,44 +39,64 @@ export default function FamiliesShow(props){
 
         return(
             <div>
-                <h1>Families Show Page</h1>
-                <div onClick={goBack}className='button'>
-                    <p>Back</p>
-                </div>
-                <h1>{props.focusFamily.name}</h1>
-                <h2>Memebers</h2>
-                {props.focusFamily.members.map((mem, i) => {
-                    return(
-                        <div key={i}>
-                            <p>{mem}</p>
-                        </div>
-                    );
-                })}
-                
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+                    <div onClick={handleModal}className='button'>
+                        <p style={{fontSize: '23px'}}>Add Member</p>
+                    </div>
 
-                <Link to={`/families/${props.focusFamily._id}/recipes`}>
+                    <Link to={`/families/${props.focusFamily._id}/recipes`}>
                         <div className= 'button'>
-                            <p style={{fontSize: "13px"}}>Family Recipes</p>
+                            <p style={{fontSize: "20px"}}>Family Recipes</p>
                         </div>
-                </Link>
+                    </Link>
 
-                <div onClick={handleModal}className='button'>
-                    <p style={{fontSize: '13px'}}>Add a Member</p>
+                    <div className='button'>
+                        <p style={{ fontSize: "19px"}}>In Development</p>
+                        
+                    
+                    </div>
+
                 </div>
-                <Modal isOpen={modal}
-                        ariaHideApp={false} 
-                        onRequestClose={handleModal}
-                        // style={{
-                        //     overlay: {
-                        //     },
-                        //     content : {
-                                
-                        //     },
-                        // }}
-                
-                >
-                    <AddMemberModal />
-                </Modal>
+                <div className='famShow background'>
+                    <h1>The {props.focusFamily.name} Table</h1>
+                    <div>
+                        <h3>Table Head - {props.focusFamily.head.username}</h3>
+                    </div>
+                    <h1 className='title'>Memebers</h1>
+
+                    
+
+                    <div className='members'>
+                        {props.focusFamily.members.map((mem, i) => {
+                            return(
+                                <div key={i}>
+                                    <h3>{mem.username} - {mem.recipes.length} Recipes</h3>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    
+
+                    
+                    <Modal isOpen={modal}
+                            ariaHideApp={false} 
+                            onRequestClose={handleModal}
+                            centered
+                            // style={{
+                            //     overlay: {
+                            //     },
+                            //     content : {
+                                    
+                            //     },
+                            // }}
+                    
+                    >
+                        <AddMemberModal />
+                    </Modal>
+                </div>
             </div>
             
         );

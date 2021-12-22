@@ -7,7 +7,7 @@ export default function IngredientInput(props){
         ingred= 'ingred 0';
     }
 
-    const checkFirst = props.first === 'true' ? <></> : <button className='minus' onClick={() => props.handleRemoveIngredient(props.pos)} type='button'>-</button>
+    const checkFirst = props.first === 'true' ? <div style={{width: '48px'}}></div> : <button className='minus' onClick={() => props.handleRemoveIngredient(props.pos)} type='button'>-</button>
     
     if(!props.edit){
         return(

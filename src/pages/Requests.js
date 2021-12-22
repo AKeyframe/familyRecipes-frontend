@@ -59,28 +59,42 @@ export default function Requests(props) {
         });
     }
 
+    const goBack = () => {
+        navigate(-1);
+    }
+
 
     if (props.profile && requests) {
         return (
             <div>
-                <h1>Requests</h1>
-                {requests.map((req, i) => {
-                    return (
-                        <div className='background' key={i}>
-                            <h1 onClick={() => toFamily(req.from)}>
-                                {req.from.name}
-                            </h1>
-                            <div>
-                                <div onClick={() => handleAccept(req)} className='button'>
-                                    <p>Accept</p>
-                                </div>
-                                <div onClick={() => handleDecline(req)} className='button'>
-                                    <p>Decline</p>
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+                </div>
+
+                <div className='requests background'>
+                    <h1>Table Requests</h1>
+                    {requests.map((req, i) => {
+                        return (
+                            <div className='req' key={i}>
+                                <h1 onClick={() => toFamily(req.from)}>
+                                    {req.from.name}
+                                </h1>
+                                <p>You have been invited to sit at the {req.from.name}'s table. Will you join them?</p>
+                                <div className='reqButtons'>
+                                    <div onClick={() => handleAccept(req)} className='button'>
+                                        <p>Accept</p>
+                                    </div>
+                                    <div onClick={() => handleDecline(req)} className='button'>
+                                        <p>Decline</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+
+                </div>
             </div>
         );
     } else {

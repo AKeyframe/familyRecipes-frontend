@@ -25,11 +25,11 @@ export default function AddMemberModal(props){
     }
 
     return(
-        <div>
-            <h1>Add A member Modal</h1>
+        <div className='addMem'>
+            <h1>Add Member</h1>
             <input type='text' placeholder='Username' name='username'
                     value={form.username} onChange={handleChange}/>
-            <div onClick={handleSubmit} className='button'>
+            <div style={{width: '200px'}}onClick={handleSubmit} className='button'>
                 <p>Add Memeber</p>
             </div>
         </div>

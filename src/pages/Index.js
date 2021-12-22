@@ -7,7 +7,9 @@ export default function Index(props){
         <div>
             <Home   profile={props.profile}
                     focusRecipe={props.focusRecipe}
-                    setFocusRecipe={props.setFocusRecipe}/>
+                    setFocusRecipe={props.setFocusRecipe}
+                    focusFamily={props.focusFamily}
+                    setFocusFamily={props.setFocusFamily}/>
         </div>
         :
         <div>

@@ -27,9 +27,6 @@ export default function FamilyRecipes(props){
             
     }, [props.focusFamily]);
 
-    const test = () => {
-        console.log(FamilyRecipes);
-    }
 
     const handleClick = (r) => {
         props.setFocusRecipe(r);
@@ -44,20 +41,30 @@ export default function FamilyRecipes(props){
     if(FamilyRecipes){
         return(
             <div>
-                <h1>Family Recipes Page</h1>
-                <div onClick={goBack}className='button'>
-                    <p>Back</p>
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+                    <div className='button'>
+                            <p style={{ fontSize: "19px"}}>In Development</p>
+                    </div>
                 </div>
-                <h1 onClick={test}>Click me</h1>
-                {FamilyRecipes.map((r, i) => {
-                    return(
-                        <div key={i} className='recipe background'>
-                            <a href='#' onClick={() => handleClick(r)}>
-                                <h1>{r.name}</h1>
-                            </a>
-                        </div>
-                    );
-                })}
+
+                <div className='famRecipes background'>
+                    <div>
+                        <h1>{props.focusFamily.name} Recipes</h1>
+                    </div>
+                    {FamilyRecipes.map((r, i) => {
+                        return(
+                            <div key={i} className='recipe'>
+                                <a href='#' onClick={() => handleClick(r)}>
+                                    <h1>{r.name}</h1>
+                                    <p>This is a temporary fake description for the recipe. Whatever it is, it's probably delicious.</p>
+                                </a>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     } else {
