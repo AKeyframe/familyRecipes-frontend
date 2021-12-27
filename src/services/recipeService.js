@@ -1,6 +1,6 @@
     
-//const URL = "https://the-family-table.herokuapp.com/recipes";
-const URL = "http://localhost:4000/recipes";
+const URL = "https://the-family-table.herokuapp.com/recipes";
+//const URL = "http://localhost:4000/recipes";
 
 const getRecipes = async () => {
     const response = await fetch(URL+'/results'); 
