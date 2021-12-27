@@ -150,7 +150,6 @@ export default function RecipeEdit(props){
                 }
             }
         
-            console.log(data)
             setNumOfI(data);
          
     }
@@ -250,8 +249,6 @@ export default function RecipeEdit(props){
         }
 
         if(type === 'ingred'){
-            console.log(event.target.name)
-            console.log(event.target.value);
             setIngred(prev => {
                 let array = [...prev];
                 array[pos] = event.target.value;
@@ -260,7 +257,6 @@ export default function RecipeEdit(props){
         }
 
         if(type === 'step'){
-            console.log(event.target.value)
             setSteps(prev => {
                 let array = [...prev];
                 array[pos] = event.target.value;

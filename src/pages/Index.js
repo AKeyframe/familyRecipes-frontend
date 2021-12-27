@@ -2,7 +2,6 @@ import Home from "./Home";
 import Login from "./Login";
 
 export default function Index(props){
-    console.log(props);
     return( props.userState.user ? 
         <div>
             <Home   profile={props.profile}
@@ -12,7 +11,7 @@ export default function Index(props){
                     setFocusFamily={props.setFocusFamily}/>
         </div>
         :
-        <div>
+        <div className='gridAccess'>
             <Login handleSignupOrLogin={props.handleSignupOrLogin} />
         </div>
     );

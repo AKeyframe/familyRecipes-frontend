@@ -4,6 +4,7 @@ import { deleteUser } from "../services/userService";
 
 export default function Profile(props){
 
+    const width = window.innerWidth;
     const navigate = useNavigate();
 
     const handleDelete = async () => {
@@ -18,16 +19,24 @@ export default function Profile(props){
         navigate(-1);
     }
 
-    return(
-        <div>
-            <div className='navButtons'>
+    function nav(){
+        if(width < 650){
+            return(
+                <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
                     </div>
                     <div className='button'>
                             <p style={{ fontSize: "19px"}}>In Development</p>
                     </div>
-            </div>
+                </div>
+            );
+        }
+    }
+
+    return(
+        <div>
+            {nav()}
 
             <div className='profile background'>
                 <h1>{props.profile.username}</h1>

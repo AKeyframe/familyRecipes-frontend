@@ -7,7 +7,6 @@ const URL = "http://localhost:4000/profile";
 async function getProfile(id){
     const response = await fetch(URL+'/'+id);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -20,8 +19,6 @@ const getProfileRecipes = async (id) => {
 const getProfileFamilies = async (id) => {
     const response = await fetch(URL+'/'+id+'/families');
     const data = await response.json();
-    console.log('Families');
-    console.log(data);
     return data;
 }
 

@@ -15,6 +15,7 @@ export default function FamilyNew(props){
     );
 
     const navigate = useNavigate();
+    const width = window.innerWidth;
 
     function handleChange(e){
         setForm(prev => ({
@@ -31,20 +32,39 @@ export default function FamilyNew(props){
         });
     }
 
+    const goBack = () => {
+        navigate(-1);
+    }
+    
+    function nav(){
+        if(width < 650){
+            return(
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+            </div>
+            );
+        } 
+    }
+
     return(
         <div>
-            <h1>New Family Page</h1>
-            <form onSubmit={handleSubmit}>
+            {nav()}
+            <div className='famNew background'>
+                <h1>Set a new Table</h1>
+                <form onSubmit={handleSubmit}>
 
-                <div>
-                    <input type='text' placeholder='Family Name' name='name'
-                            value={form.name} onChange={handleChange} />
-                </div>
+                    <div>
+                        <input type='text' placeholder='Family Name' name='name'
+                                value={form.name} onChange={handleChange} />
+                    </div>
 
-                <div>
-                    <button className='btn'>Create This Family's Table</button>
-                </div>
-            </form>
+                    <div>
+                        <button className='button'>Create Table</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

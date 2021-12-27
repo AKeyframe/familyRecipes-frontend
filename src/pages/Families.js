@@ -12,6 +12,7 @@ export default function Families(props){
     const [families, setFamilies] = useState();
 
     const navigate = useNavigate();
+    const width = window.innerWidth;
 
     useEffect(() => {
         const getFamilies = async () => {
@@ -40,10 +41,9 @@ export default function Families(props){
         navigate(-1);
     }
 
-    if(families){
-        console.log(families);
-        return(
-            <div className='families'>
+    function nav(){
+        if(width < 650){
+            return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
@@ -56,8 +56,17 @@ export default function Families(props){
                         </Link>
                     </div>
                 </div>
+            );
+        }
+    }
 
-                <div className='background'>
+    if(families){
+        return(
+            <div>
+                
+                {nav()}
+
+                <div className='families background'>
                     <h1>Your Family Tables</h1>
                
 

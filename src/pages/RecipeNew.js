@@ -29,6 +29,7 @@ export default forwardRef(function RecipeNew (props, ref) {
     const [subTime, setSubTime] = useState(false);
     const bool = useRef(false); //wish i found useRef earlier 
     const navigate = useNavigate();
+    const width = window.innerWidth;
 
     //Responsible for the Components associated with Ingredients
     const [numOfI, setNumOfI] = useState([<IngredientInput first='true' handleChange={handleChange} key={0} />]);
@@ -269,10 +270,28 @@ export default forwardRef(function RecipeNew (props, ref) {
         props.setProfile(await getProfile(props.user.user.profile));
     }
 
+    const goBack = () => {
+        navigate(-1);
+    }
+
+    function nav(){
+        if(width < 650){
+            return(
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+                </div>
+            );
+        }
+    }
+
     if(props.profile){
         return (
-            <div className='recipeNewPage'>
-                <div className='background new'>
+            <div>
+               
+                <div className='new'>
+                     {nav()}
                     <form onSubmit={handleSubmit}>
                         <div className='ingred'>
                             <input type='hidden' name='creator' 
@@ -301,6 +320,7 @@ export default forwardRef(function RecipeNew (props, ref) {
                     </form>
                 </div>
             </div>
+            
         );
     } else {
         updateProfile();

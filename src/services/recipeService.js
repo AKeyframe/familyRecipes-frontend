@@ -36,7 +36,6 @@ const deleteRecipe = async (id) => {
 }
 
 const updateRecipe = async (data, id) => {
-    console.log(data);
     await fetch(URL +'/'+ id, {
         method: "PUT",
         headers: {

@@ -22,7 +22,6 @@ const getOneFamily = async (id) => {
 const getFamilyRecipes = async (id) => {
     const response = await fetch(URL+'/'+id+'/recipes');
     const data = await response.json();
-    console.log(data);
     return data;
 }
 

@@ -18,7 +18,6 @@ export default function RecipeResults(props) {
     useEffect(() => updateRecipe(), []);
 
     const loaded = () => {
-        console.log(recipes)
         return recipes.map((recipe) => (
             <div key={recipe._id} className='recipe background'>
               

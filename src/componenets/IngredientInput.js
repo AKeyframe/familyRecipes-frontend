@@ -26,7 +26,6 @@ export default function IngredientInput(props){
     //When Editing
     } else {
         if((props.amount[props.pos] && props.ingred[props.pos]) || (props.amount[props.pos] === '' || props.ingred[props.pos] === '')){
-            console.log('Edit return 1')
            return(
                 <div className='ingredient'>
                     <input className='amInp' type='text' name={amount} 
@@ -44,7 +43,6 @@ export default function IngredientInput(props){
             );
 
         } else {
-            console.log('Edit return 2')
             return(
                 
                 <div className='ingredient'>

@@ -6,6 +6,7 @@ import '../App.scss';
 
 export default function UserRecipes(props){
 
+    const width = window.innerWidth;
     const navigate = useNavigate();
 
     const handleClick = (r) => {
@@ -17,21 +18,29 @@ export default function UserRecipes(props){
         navigate(-1);
     }
 
+    function nav(){
+        if(width < 650){
+            return(
+                <div className='navButtons'>
+                    <div onClick={goBack}className='button'>
+                        <p>Back</p>
+                    </div>
+
+                    <Link to='/recipes/new'>
+                        <div className='button'>
+                            <p>New Recipe</p>
+                        </div>
+                    </Link>
+                </div>
+            );
+        }
+    }
+
     if(props.profile){
         if(props.profile.recipes){
             return(
                 <div>
-                    <div className='navButtons'>
-                        <div onClick={goBack}className='button'>
-                            <p>Back</p>
-                        </div>
-
-                        <Link to='/recipes/new'>
-                            <div className='button'>
-                                <p>New Recipe</p>
-                            </div>
-                        </Link>
-                    </div>
+                    {nav()}
 
                     <div className='userRecipes background'>
                         <h1>Your Recipes</h1>

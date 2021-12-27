@@ -8,6 +8,7 @@ import { getProfile,
 export default function Requests(props) {
 
     const [requests, setRequests] = useState();
+    const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         if(props.profile){
@@ -22,14 +23,11 @@ export default function Requests(props) {
     }
 
     const toFamily = (req) => {
-        console.log(req);
         props.setFocusFamily(req);
         navigate(`/families/${req._id}`);
     }
 
     const handleAccept = async (req) => {
-        console.log('accepted');
-        console.log(req._id)
         const data = {  dec: 'accept', 
                         famID: req.from._id,
                         reqID: req._id, 
@@ -46,8 +44,6 @@ export default function Requests(props) {
     }
 
     const handleDecline = async (req) => {
-        console.log('declined');
-        console.log(req._id)
         const data = {  dec: 'decline', 
                         famID: req.from._id,
                         reqID: req._id, 
@@ -63,15 +59,22 @@ export default function Requests(props) {
         navigate(-1);
     }
 
-
-    if (props.profile && requests) {
-        return (
-            <div>
+    function nav(){
+        if(width < 650){
+            return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
                     </div>
                 </div>
+            );
+        }
+    }
+
+    if (props.profile && requests) {
+        return (
+            <div>
+                {nav()}
 
                 <div className='requests background'>
                     <h1>Table Requests</h1>

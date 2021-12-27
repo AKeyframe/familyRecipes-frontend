@@ -12,12 +12,11 @@ import { getOneFamily } from "../services/familyServices";
 
 
 export default function FamiliesShow(props){
-    console.log('=======================')
-    console.log(props);
     const [modal, setModal] = useState(false);
 
     const params = useParams();
     const navigate = useNavigate();
+    const width = window.innerWidth;
 
     const updateFocusFamily = async () => {
         props.setFocusFamily(await getOneFamily(params.id));
@@ -31,14 +30,9 @@ export default function FamiliesShow(props){
         navigate(-1);
     }
 
-    if(!props.focusFamily){
-        updateFocusFamily();
-
-        return <h1>loading...</h1>
-    } else {
-
-        return(
-            <div>
+    function nav(){
+        if(width < 650){
+            return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
@@ -55,11 +49,21 @@ export default function FamiliesShow(props){
 
                     <div className='button'>
                         <p style={{ fontSize: "19px"}}>In Development</p>
-                        
-                    
                     </div>
-
                 </div>
+            );
+        } 
+    }
+
+    if(!props.focusFamily){
+        updateFocusFamily();
+
+        return <h1>loading...</h1>
+    } else {
+
+        return(
+            <div>
+                {nav()}
                 <div className='famShow background'>
                     <h1>The {props.focusFamily.name} Table</h1>
                     <div>
@@ -94,7 +98,7 @@ export default function FamiliesShow(props){
                             // }}
                     
                     >
-                        <AddMemberModal />
+                        <AddMemberModal handleModal={handleModal}/>
                     </Modal>
                 </div>
             </div>

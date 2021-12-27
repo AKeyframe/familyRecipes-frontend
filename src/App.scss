@@ -3,7 +3,7 @@ $secColor: rgba(202, 177, 173, 0.25); //rgb(255, 190, 179)
 $hoverColor: rgb(255, 238, 235);
 $bgColor: rgb(255, 255, 255);
 $inputBgColor: rgba(214, 171, 164, 0.25);
-
+$hiColor: #ff00000f;
 $shadow: rgba(0, 0, 0, 0.20) 3px 3px 3px;
 $textShadow: rgba(0, 0, 0, 0.20) 2px 2px 1px;
 $pressedShadow: rgba(0, 0, 0, 0.40) 2px 2px 2px;
@@ -18,6 +18,7 @@ html{
   background-color: $secColor;
   background-repeat: repeat;
   background-size: contain;
+  
 }
 
 a{
@@ -35,7 +36,7 @@ form{
     box-shadow: $shadow;
 
 
-    background-color: $secColor;
+    background-color: $hiColor;
     color:$mainColor;
     text-align: center;
     font-size: 18px;
@@ -52,6 +53,8 @@ form{
 
   input:focus{
     outline: none;
+    color: black;
+    background-color: $bgColor;
   }
 
   textarea {
@@ -81,7 +84,6 @@ form{
   button:hover{
     background-color: $bgColor;
     color:$mainColor;
-    border: $mainColor solid 1px;
     box-shadow: $pressedShadow;
   }
  
@@ -94,6 +96,8 @@ p {
 .nav{
   display:flex;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
   
   background-color: $mainColor;
   border-bottom-left-radius: 5px;
@@ -104,6 +108,12 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .dropdowns{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
   }
 
   .sidebar{
@@ -175,10 +185,9 @@ p {
     color: $bgColor;
   }
 
-  a:hover{
-    border-bottom: solid $hoverColor 7px;
-    border-radius: 5px;
-  }
+  // a:hover{
+    
+  // }
  
   form{
     margin: auto;
@@ -246,7 +255,7 @@ p {
   display: flex;
   justify-content: center;
   align-content: center;
-
+  cursor: pointer;
   background-color: $mainColor;
   color:$bgColor;
   border-radius: 3px;
@@ -267,7 +276,6 @@ p {
 .button:hover{
   background-color: $bgColor;
   color:$mainColor;
-  border: $mainColor solid 1px;
   box-shadow: $pressedShadow;
 }
 
@@ -287,6 +295,7 @@ p {
     font-size: 20px;
     color: $mainColor;
     text-shadow: $textShadow;
+    cursor: pointer;
   }
 
   p{
@@ -299,7 +308,7 @@ p {
   justify-content: space-evenly;
   flex-wrap: wrap;
 
-  margin: 20px;
+  margin: 90px 20px 20px 20px;
 }
 
 .ownerButtons{
@@ -320,7 +329,7 @@ p {
 }
 
 //-------------------------------------------------------------------------
-//                        Modals
+//                        Navigation Items
 //-------------------------------------------------------------------------
 
 .addMem{
@@ -328,7 +337,63 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  input{
+    background-color: #fff;
+    border: solid black .75px;
+    border-radius: 10px;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+
+    width: 230px;
+    height: 28px;
+
+    margin: 8px 5px;
+    padding: 3px;
+  }
 }
+
+#userDropLink, #famDropLink{
+  
+  cursor: pointer;
+
+}
+
+.userDropdown, .famDropdown{
+  position: relative;
+  display: inline-block;
+  float: right;
+  color: $mainColor;
+  margin-right: 10px;
+  
+}
+
+.uDropItems, .fDropItems{
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 160px;
+  background-color: $bgColor;
+  color: $mainColor;
+  box-shadow: rgba(0, 0, 0, 0.40) 0px 0px 10px;;
+  
+  z-index: 1;
+
+  a{
+    color: $mainColor;
+    
+  }
+
+  
+}
+
+// .uDropItems a:hover{background-color: $mainColor; color: $bgColor;}
+.userDropdown:hover .uDropItems {display: flex; flex-direction: column; align-items: center;}
+
+// .fDropItems a:hover{background-color: $mainColor; color: $bgColor;}
+.famDropdown:hover .fDropItems {display: block;}
+// .userDropdown:hover {}
 
 ///////////////////////////////////////////////////////////////////////////
 //                        Pages
@@ -384,12 +449,16 @@ p {
 
 
 //-----------------------HOME------------------------------
+.desktop{
+  display: flex;
+}
+
 .home{
   .quick{
     display: flex;
     justify-content: space-evenly;
 
-    margin: 20px;
+    margin: 90px 20px 20px 20px;
   }
 
   .smallFams, .smallFavs{
@@ -428,6 +497,12 @@ p {
   width: 90vw;
 
   text-align: center;
+
+  form{
+    background-color:$bgColor;
+    border-radius: 10px;
+    box-shadow: $shadow;
+  }
 
   h1{
     margin: 10px 0px 0px 5px;
@@ -544,7 +619,7 @@ p {
 
   .ingredientsList{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
 
     h4{
@@ -586,6 +661,20 @@ p {
     }
   }
  
+}
+
+.famNew{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.families{
+
+  h2{
+    cursor: pointer;
+  }
 }
 
 .famShow{
@@ -665,4 +754,144 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//                        Media Queries
+///////////////////////////////////////////////////////////////////////////
+
+@media only screen and (min-width: 651px){
+
+  .desktop{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr;
+  
+  }
+
+  .gridAccess{
+    grid-area: 1 / 2 / 2 / 3;
+
+    .background{
+      width: 60%;
+    }
+  }
+
+  .SignupPage{
+    grid-area: 1 / 2 / 2 / 3;
+
+    .background{
+      width: 60%;
+    }
+  }
+  
+  .leftSidebar{
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+   
+    
+  
+    background-color:$bgColor;
+    border-radius: 10px;
+    box-shadow: $shadow;
+    text-align: left;
+  
+    height: 77vh;
+    margin: 20px 15px 15px 15px;
+    padding: 10px;
+  
+    h2{
+      text-align: center;
+    }
+  
+    h3{
+      white-space: nowrap;
+      font-size: 16px;
+      margin: 5px;
+    }
+  }
+  
+  .rightSidebar{
+    grid-area: 1 / 3 / 2 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    background-color:$bgColor;
+    border-radius: 10px;
+    box-shadow: $shadow;
+  
+    height: 77vh;
+    margin: 20px 15px 15px 15px;
+    padding: 10px;
+  
+    h2{
+      text-align: center;
+    }
+  
+    h3{
+      white-space: nowrap;
+      font-size: 12px;
+      margin: 5px;
+    }
+  }
+
+  .nav{
+    position: static;
+
+    .dropdowns{
+      margin-right: 0px;
+    }
+  }
+
+  .profile{
+    width: 90%;
+  }
+
+  .userRecipes{
+    width: 90%;
+  }
+
+  .recipeNewPage{
+    display: inline-block;
+  }
+
+  .new{
+    grid-area: 1 / 2 / 2 / 3;
+    width: 90%;
+    margin-top: 13px;
+    margin-right: 10px;
+    padding: 5px;
+
+    form{
+      background-color:$bgColor;
+      border-radius: 10px;
+      box-shadow: $shadow;
+    }
+  }
+
+  .show{
+    width: 90%;
+  }
+
+  .favorites{
+    width: 90%;
+  }
+
+  .requests{
+    width: 90%;
+  }
+
+  .families{
+    width: 90%;
+  }
+
+  .famNew{
+    width: 90%;
+  }
+
+  .famShow{
+    width: 90%;
+  }
 }

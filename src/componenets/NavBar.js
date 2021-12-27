@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { GoThreeBars } from 'react-icons/go';
 
 const NavBar = (props) => {
-    const width = window.screen.width;
+    const width = window.innerWidth;
     
     const [signOrLog, setSignOrLog] = useState('/signup');
     const [menu, setMenu] = useState(false);
+    const [famDrop, setFamDrop] = useState(false);
+    const [userDrop, setUserDrop] = useState(false);
 
     function toggleMenu(){setMenu(!menu);}
 
@@ -44,17 +46,55 @@ const NavBar = (props) => {
             return(
                 <div className='nav'>
                     <Link to='/'><h2>The Family Table</h2></Link>
-                    <form>
-                        <input  type="text" 
-                                name='search' 
-                                placeholder='Search Recipes (WIP)' 
-                        />
-                    </form>
-                    <Link to='' onClick={props.handleLogout}>
-                        <h2>Sign Out</h2>
-                    </Link>
-            {/* ☰ */}
-        </div>
+                    
+
+                    <div className='dropdowns'>
+                        
+                        <div className='famNav famDropdown'>
+                            <Link id='famDropLink' to='/families'>
+                                <h2>Tables</h2>
+                            </Link>
+
+                            <div className='fDropItems'>
+                                <Link id='famDropLink' to='/families'>
+                                    <h2>Your Tables</h2>
+                                </Link>
+
+                                <Link to='/families/new'>
+                                    <h2>New Table</h2>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className='userNav userDropdown'>
+                            <Link id='userDropLink' to='/profile'>
+                                <h2>Profile</h2>
+                            </Link>
+
+                            <div className='uDropItems'>
+                                <Link to='/recipes'>
+                                    <h2 className='menuItem'>Your Recipes</h2>
+                                </Link>
+
+                                <Link to='/recipes/new'>
+                                    <h2 className='menuItem'>New Recipe</h2>
+                                 </Link>
+
+                                <Link to='/favorites'>
+                                    <h2 className='menuItem'>Favorites</h2>
+                                </Link>
+
+                                <Link to='/requests'>
+                                    <h2 className='menuItem'>Requests</h2>
+                                </Link>
+                            
+                                <Link to='' onClick={props.handleLogout}>
+                                    <h2>Sign Out</h2>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             );
         } else {
             return(

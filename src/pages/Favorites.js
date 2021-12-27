@@ -1,8 +1,10 @@
+import { useState } from 'react'; 
 import { useNavigate } from "react-router";
 import { getProfile } from "../services/profileServices";
 
 export default function Favorites(props) {
 
+    const [width, setWidth] = useState(window.innerWidth);
     const navigate = useNavigate();
     
 
@@ -19,14 +21,22 @@ export default function Favorites(props) {
         navigate(-1);
     }
 
-    if(props.profile){
-        return(
-            <div>
+    function nav(){
+        if(width < 650){
+            return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
                     </div>
                 </div>
+            );
+        }
+    }
+
+    if(props.profile){
+        return(
+            <div>
+                {nav()}
 
                 <div className='favorites background'>
                     <h1>Your Favorites</h1>

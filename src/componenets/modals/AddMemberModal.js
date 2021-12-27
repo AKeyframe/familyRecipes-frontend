@@ -16,11 +16,8 @@ export default function AddMemberModal(props){
     }
 
     const handleSubmit = async () => {
-        console.log(form.username);
-        console.log(form.id);
-
         await sendFamilyRequest(form.username, form.id).then(() => {
-            console.log('time to close the modal');
+            props.handleModal();
         });
     }
 

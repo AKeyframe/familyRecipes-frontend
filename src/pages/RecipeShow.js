@@ -7,9 +7,9 @@ import { deleteRecipe, getOneRecipe } from "../services/recipeService";
 import { getProfile, FavoriteARecipe } from '../services/profileServices';
 
 export default function RecipeShow(props){
-    console.log(props.focusRecipe);
     const params = useParams();
     const navigate = useNavigate();
+    const width = window.innerWidth;
 
    
     async function handleSubmit(){
@@ -37,40 +37,42 @@ export default function RecipeShow(props){
     }
 
     const headers = () => {
-        if(props.focusRecipe.creator === props.profile._id){
-            return(
-                <div className='navButtons'>
+        if(width < 650){
+            if(props.focusRecipe.creator === props.profile._id){
+                return(
+                    <div className='navButtons'>
 
-                    <div onClick={goBack} className='button'>
-                        <p>Back</p>
+                        <div onClick={goBack} className='button'>
+                            <p>Back</p>
+                        </div>
+
+                        <div onClick={handleFavorite} className='button'>
+                                <p>Favorite</p>
+                        </div>
+
+                        <div onSubmit={handleSubmit} className='button'>
+                            <p>Delete</p>
+                        </div>
+
+                        <div onClick={handleEdit} className='button'>
+                            <p>Edit</p>
+                        </div>                    
                     </div>
+                );
+            } else {
+                return(
+                    <div className='navButtons'>
 
-                    <div onClick={handleFavorite} className='button'>
-                            <p>Favorite</p>
+                        <div onClick={goBack} className='button'>
+                            <p>Back</p>
+                        </div>
+
+                        <div onClick={handleFavorite} className='button'>
+                                <p>Favorite</p>
+                        </div>       
                     </div>
-
-                    <div onSubmit={handleSubmit} className='button'>
-                        <p>Delete</p>
-                    </div>
-
-                    <div onClick={handleEdit} className='button'>
-                        <p>Edit</p>
-                    </div>                    
-                </div>
-            );
-        } else {
-            return(
-                <div className='navButtons'>
-
-                    <div onClick={goBack} className='button'>
-                        <p>Back</p>
-                    </div>
-
-                    <div onClick={handleFavorite} className='button'>
-                            <p>Favorite</p>
-                    </div>       
-                </div>
-            );
+                );
+            }
         }
     }
 
@@ -130,7 +132,6 @@ export default function RecipeShow(props){
         //This if is for when the user refreshes the page
         if(!props.profile){
             getTheRequirements();
-            console.log(props.profile);
         }
         
         return <h1>Loading...</h1>;

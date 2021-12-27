@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router';
 //Services
 import { getOneRecipe } from '../services/recipeService';
 import { getOneFamily } from '../services/familyServices';
+import UserRecipes from './UserRecipes';
 
 export default function Home(props){
 
-    const width = window.screen.width;
+    const width = window.innerWidth;
     const navigate = useNavigate();
 
     async function handleRecLink(id){
@@ -73,7 +74,12 @@ export default function Home(props){
         return(
             <div className='indexPage'>
                 <div className='index'>
-                
+                     <UserRecipes 
+                        profile={props.profile}
+                        setProfile={props.setProfile}
+                        focusRecipe={props.focusRecipe}
+                        setFocusRecipe={props.setFocusRecipe}
+                     />
                 </div>
             </div>
         );
@@ -97,9 +103,9 @@ export default function Home(props){
 
                     <div className='smallFavs background'>
                         
-                            <Link to='/favorites'>
-                                <h2 className='title'>Favorites</h2>
-                            </Link>
+                        <Link to='/favorites'>
+                            <h2 className='title'>Favorites</h2>
+                        </Link>
                         
                         {smallFavs()}
                     </div>
