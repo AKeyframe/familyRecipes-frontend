@@ -311,6 +311,43 @@ p {
   margin: 90px 20px 20px 20px;
 }
 
+.navDeskButtons{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 0px 20px 5px 20px;
+
+  .deskButton{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  cursor: pointer;
+  background-color: $mainColor;
+  color:$bgColor;
+  border-radius: 3px;
+  box-shadow: $shadow;
+  width: 70px;
+  height: 28px;
+
+  margin: 15px 5px;
+  padding: 0px 5px;
+
+    p{
+      margin: auto;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .deskButton:hover{
+    background-color: $bgColor;
+    color:$mainColor;
+    box-shadow: $pressedShadow;
+  
+  }
+
+}
+
 .ownerButtons{
   display: flex;
   justify-content: space-evenly;
@@ -451,6 +488,8 @@ p {
 //-----------------------HOME------------------------------
 .desktop{
   display: flex;
+  justify-content: center;
+  
 }
 
 .home{
@@ -492,7 +531,6 @@ p {
   justify-content: center;
   align-items: center;
 
-  margin-top: 25px;
   padding:2px;
   width: 90vw;
 
@@ -542,9 +580,11 @@ p {
     margin-top: 15px;
   }
 
-  .blankMinusDiv {
-    width: 35px;
+  .first {
+    align-self: start;
   }
+
+  
   
   input::placeholder{
     color: grey;
@@ -671,7 +711,7 @@ p {
 }
 
 .families{
-
+  text-align: center;
   h2{
     cursor: pointer;
   }
@@ -684,6 +724,7 @@ p {
   align-items: center;
 
   h1, h3{
+    white-space: wrap;
     margin: 5px 0px;
   }
 
@@ -721,6 +762,8 @@ p {
   align-items: center;
 }
 
+
+
 .requests{
   display: flex;
   flex-direction: column;
@@ -733,6 +776,7 @@ p {
     box-shadow: $shadow;
     margin: 10px;
     padding: 5px;
+
     h1{
       font-size: 20px;
       color: $mainColor;
@@ -759,6 +803,52 @@ p {
 ///////////////////////////////////////////////////////////////////////////
 //                        Media Queries
 ///////////////////////////////////////////////////////////////////////////
+
+@media only screen and (min-width: 435px){
+    .new{
+      .ingredient{
+        margin: 5px 20px;
+      }
+      .ingInp{
+        height: 20px;
+        width: 200px;
+        font-size: 14px;
+      }
+
+      .amInp{
+        height: 20px;
+        width: 80px;
+        font-size: 14px;
+      }
+
+      .minus{
+        width: 30px;
+        margin: 5px;
+      }
+    }
+  
+}
+
+@media only screen and (min-width: 525px){
+  .new{
+    .ingInp{
+      height: 20px;
+      width: 250px;
+      font-size: 14px;
+    }
+
+    .amInp{
+      margin-left: 20px;
+      height: 20px;
+      width: 80px;
+      font-size: 14px;
+    }
+
+    .minus{
+      width: 40px;
+    }
+  }
+}
 
 @media only screen and (min-width: 651px){
 
@@ -859,15 +949,32 @@ p {
 
   .new{
     grid-area: 1 / 2 / 2 / 3;
-    width: 90%;
-    margin-top: 13px;
-    margin-right: 10px;
-    padding: 5px;
+    width: 100%;
+    margin-top: 20px;
+    
+    padding: 3px;
 
     form{
       background-color:$bgColor;
       border-radius: 10px;
       box-shadow: $shadow;
+    }
+
+    .blankMinusDiv{
+      min-width: 85px;
+    }
+
+    .amInp {
+      margin: 8px 3px;
+      width:85px;
+      height: 20px;
+      font-size: 14px;
+    }
+    .ingInp{
+      margin: 8px 3px;
+      width: 225px;
+      height: 20px;
+      font-size: 14px;
     }
   }
 
@@ -893,5 +1000,45 @@ p {
 
   .famShow{
     width: 90%;
+  }
+
+  .famRecipes{
+    width: 90%;
+  }
+
+  .UR{
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 900px){
+  .nav{
+    h2{
+      font-size: 28px;
+      white-space: nowrap;
+    }
+    .dropdowns{
+      margin-right: 30px;
+    }
+  }
+
+  .leftSidebar{
+    h2{
+      font-size: 36px;
+    }
+  
+    h3{
+      font-size: 22px;
+    }
+  }
+
+  .rightSidebar{
+    h2{
+      font-size: 36px;
+    }
+  
+    h3{
+      font-size: 18px;
+    }
   }
 }

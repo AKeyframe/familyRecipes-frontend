@@ -74,7 +74,7 @@ export default function Home(props){
         return(
             <div className='indexPage'>
                 <div className='index'>
-                     <UserRecipes 
+                     <UserRecipes
                         profile={props.profile}
                         setProfile={props.setProfile}
                         focusRecipe={props.focusRecipe}

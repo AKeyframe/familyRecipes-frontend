@@ -30,6 +30,7 @@ export default function RecipeEdit(props){
     
     const navigate = useNavigate();
     const params = useParams();
+    const width = window.innerWidth;
 
     useEffect(() => {
         //If the page was loaded set the inital states
@@ -396,19 +397,28 @@ export default function RecipeEdit(props){
         props.setFocusRecipe(await getOneRecipe(params.id));
     }
 
+    function nav(){
+        if(width < 650){
+            return(
+                <div>
+                    <div className='navButtons'>
+                        <div onClick={goBack} className='button'>
+                            <p>Back</p>
+                        </div>
+
+                        <div onClick={handleDelete} className='button'>
+                            <p>Delete</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    }
+
     if(props.focusRecipe){
         return(
             <div>
-                <div className='navButtons'>
-                    <div onClick={goBack} className='button'>
-                        <p>Back</p>
-                    </div>
-
-                    <div onClick={handleDelete} className='button'>
-                        <p>Delete</p>
-                    </div>
-                </div>
-                
+                {nav()}
                 
                 <div className='background new'>
                     <form> {/*onSubmit={handleSubmit}*/}

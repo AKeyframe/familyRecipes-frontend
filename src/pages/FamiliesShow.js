@@ -31,7 +31,7 @@ export default function FamiliesShow(props){
     }
 
     function nav(){
-        if(width < 650){
+        if(width <= 650){
             return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
@@ -52,7 +52,29 @@ export default function FamiliesShow(props){
                     </div>
                 </div>
             );
-        } 
+        }
+    }
+
+    function navDesk(){
+        if(width > 650){
+            return(
+                <div className='navDeskButtons'>
+                    <div onClick={handleModal}className='deskButton'>
+                        <p style={{fontSize: '11px'}}>Add Member</p>
+                    </div>
+
+                    <Link to={`/families/${props.focusFamily._id}/recipes`}>
+                        <div className= 'deskButton'>
+                            <p style={{fontSize: "10px"}}>Family Recipes</p>
+                        </div>
+                    </Link>
+
+                    <div className='deskButton'>
+                        <p style={{ fontSize: "8px"}}>In Development</p>
+                    </div>
+                </div>
+            );
+        }
     }
 
     if(!props.focusFamily){
@@ -69,9 +91,10 @@ export default function FamiliesShow(props){
                     <div>
                         <h3>Table Head - {props.focusFamily.head.username}</h3>
                     </div>
-                    <h1 className='title'>Memebers</h1>
 
-                    
+                    {navDesk()}
+
+                    <h1 className='title'>Memebers</h1>
 
                     <div className='members'>
                         {props.focusFamily.members.map((mem, i) => {
@@ -89,13 +112,14 @@ export default function FamiliesShow(props){
                             ariaHideApp={false} 
                             onRequestClose={handleModal}
                             centered
-                            // style={{
-                            //     overlay: {
-                            //     },
-                            //     content : {
+                            style={{
+                                overlay: {
+                                    background: 'rgba(0, 0, 0, 0.25)'
+                                },
+                                // content : {
                                     
-                            //     },
-                            // }}
+                                // },
+                            }}
                     
                     >
                         <AddMemberModal handleModal={handleModal}/>

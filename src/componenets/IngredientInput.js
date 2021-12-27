@@ -7,12 +7,12 @@ export default function IngredientInput(props){
         ingred= 'ingred 0';
     }
 
-    const checkFirst = props.first === 'true' ? <div style={{width: '48px'}}></div> : <button className='minus' onClick={() => props.handleRemoveIngredient(props.pos)} type='button'>-</button>
+    const checkFirst = props.first === 'true' ? <div ></div> : <button className='minus' onClick={() => props.handleRemoveIngredient(props.pos)} type='button'>-</button>
     
     if(!props.edit){
         return(
             
-            <div className='ingredient'>
+            <div className={props.first ? 'ingredient first ' : 'ingredient'}>
                 <input className='amInp' type='text' name={amount} 
                     onChange={props.handleChange} placeholder='#'/>
 
@@ -27,7 +27,7 @@ export default function IngredientInput(props){
     } else {
         if((props.amount[props.pos] && props.ingred[props.pos]) || (props.amount[props.pos] === '' || props.ingred[props.pos] === '')){
            return(
-                <div className='ingredient'>
+                <div className={props.first ? 'ingredient first ' : 'ingredient'}>
                     <input className='amInp' type='text' name={amount} 
                         onChange={props.handleChange} placeholder='#'
                         value={props.amount[props.pos]} //

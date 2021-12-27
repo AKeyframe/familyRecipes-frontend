@@ -316,7 +316,11 @@ export default forwardRef(function RecipeNew (props, ref) {
                         {numOfSteps}
                         
                         <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
-                        <button>Submit</button>
+                        <button style={{
+                            width: '150px',
+                            height: '40px',
+                            
+                        }}><h2 style={{margin: '0px'}}>Submit</h2></button>
                     </form>
                 </div>
             </div>

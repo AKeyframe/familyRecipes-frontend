@@ -10,6 +10,7 @@ export default function FamilyRecipes(props){
     const [FamilyRecipes, setFamilyRecipes] = useState();
     const navigate = useNavigate();
     const params = useParams();
+    const width = window.innerWidth;
 
     useEffect(() => {
         const gfr = async () => {
@@ -38,17 +39,25 @@ export default function FamilyRecipes(props){
         navigate(-1);
     }
 
-    if(FamilyRecipes){
-        return(
-            <div>
+    function nav(){
+        if(width <= 650){
+            return(
                 <div className='navButtons'>
                     <div onClick={goBack}className='button'>
                         <p>Back</p>
                     </div>
                     <div className='button'>
-                            <p style={{ fontSize: "19px"}}>In Development</p>
+                        <p style={{ fontSize: "19px"}}>In Development</p>
                     </div>
                 </div>
+            );
+        }
+    }
+
+    if(FamilyRecipes){
+        return(
+            <div>
+                {nav()}
 
                 <div className='famRecipes background'>
                     <div>

@@ -76,6 +76,36 @@ export default function RecipeShow(props){
         }
     }
 
+    function desktopButtons(){
+        if(width > 650){
+            if(props.focusRecipe.creator === props.profile._id){
+                return(
+                    <div className='navDeskButtons'>
+                        <div onClick={handleEdit} className='deskButton'>
+                            <p>Edit</p>
+                        </div>
+
+                        <div onClick={handleSubmit} className='deskButton'>
+                            <p>Delete</p>
+                        </div>
+
+                        <div onClick={handleFavorite} className='deskButton'>
+                                <p>Favorite</p>
+                        </div>                    
+                    </div>
+                );
+            } else {
+                return(
+                    <div className='navDeskButtons'>
+                        <div onClick={handleFavorite} className='deskButton'>
+                                <p>Favorite</p>
+                        </div>       
+                    </div>
+                );
+            }
+        }
+    }
+
     const loaded = () => {
         return(
             <div className='showPage'>
@@ -85,6 +115,8 @@ export default function RecipeShow(props){
                 <div className='show background'>
                     <h1>{props.focusRecipe.name}</h1>
                     
+                    {desktopButtons()}
+
                     <div className='ingredientsList'>
                         <table>
                             <tbody>

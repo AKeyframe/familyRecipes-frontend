@@ -38,27 +38,47 @@ export default function UserRecipes(props){
 
     if(props.profile){
         if(props.profile.recipes){
-            return(
-                <div>
-                    {nav()}
+            if(props.profile.recipes.length > 0){
+                return(
+                    <div className='UR'>
+                        {nav()}
 
-                    <div className='userRecipes background'>
-                        <h1>Your Recipes</h1>
+                        <div className='userRecipes background'>
+                            <h1>Your Recipes</h1>
 
-                        {props.profile.recipes.map((r, i) =>{
-                            
-                        return(
-                                <div className={'recipe'} key={i}>
-                                    <h1 onClick={() => handleClick(r)}>
-                                        {r.name}
-                                    </h1>
-                                    <p>This is a temporary fake description for the recipe. Whatever it is, it's probably delicious.</p>
-                                </div>
-                        );  
-                        })}
+                            {props.profile.recipes.map((r, i) =>{
+                                
+                            return(
+                                    <div className={'recipe'} key={i}>
+                                        <h1 onClick={() => handleClick(r)}>
+                                            {r.name}
+                                        </h1>
+                                        <p>This is a temporary fake description for the recipe. Whatever it is, it's probably delicious.</p>
+                                    </div>
+                            );  
+                            })}
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            } else {
+                return(
+                    <div className='UR'>
+                        {nav()}
+
+                        <div className='userRecipes background'>
+                            <h1>Your Recipes</h1>
+                            <p>You don't have any recipes yet.</p>
+                            <div>
+                                <Link to='/recipes/new'>
+                                    <p>How about adding one?</p>
+                                </Link>
+                            </div>
+                            
+                        </div>
+                    </div>
+                );
+
+            }
         } else {
             return <h1>Loading</h1>
         } 

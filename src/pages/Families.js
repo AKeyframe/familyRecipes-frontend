@@ -61,31 +61,46 @@ export default function Families(props){
     }
 
     if(families){
-        return(
-            <div>
+        if(families.length > 0){
+            return(
+                <div>
+                    
+                    {nav()}
+
+                    <div className='families background'>
+                        <h1>Your Family Tables</h1>
                 
-                {nav()}
 
-                <div className='families background'>
-                    <h1>Your Family Tables</h1>
-               
-
-                    <div className='smallFams'>
-                        {families.map((fam, i) =>{
-                            return(
-                                <div className='sFam' key={i}>
-                                    
-                                    <h2 onClick={() => handleClick(fam)}>
-                                            {fam.name} 
-                                    </h2>
-                                    
-                                </div>
-                            );
-                        })}
+                        <div className='smallFams'>
+                            {families.map((fam, i) =>{
+                                return(
+                                    <div className='sFam' key={i}>
+                                        
+                                        <h2 onClick={() => handleClick(fam)}>
+                                                {fam.name} 
+                                        </h2>
+                                        
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return(
+                <div>
+                    {nav()}
+                    <div className='families background'>
+                        <h1>Your Family Tables</h1>
+                        <p>You have not joined a table yet.</p>
+                        <Link to='/families/new'>
+                            <p>How about starting a new Table?</p>
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
     } else {
         return(
             <div>

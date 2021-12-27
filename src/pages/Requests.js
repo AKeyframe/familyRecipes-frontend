@@ -72,34 +72,47 @@ export default function Requests(props) {
     }
 
     if (props.profile && requests) {
-        return (
-            <div>
-                {nav()}
+        if(requests.length > 0){
+            return (
+                <div className='requestPage'>
+                    {nav()}
 
-                <div className='requests background'>
-                    <h1>Table Requests</h1>
-                    {requests.map((req, i) => {
-                        return (
-                            <div className='req' key={i}>
-                                <h1 onClick={() => toFamily(req.from)}>
-                                    {req.from.name}
-                                </h1>
-                                <p>You have been invited to sit at the {req.from.name}'s table. Will you join them?</p>
-                                <div className='reqButtons'>
-                                    <div onClick={() => handleAccept(req)} className='button'>
-                                        <p>Accept</p>
-                                    </div>
-                                    <div onClick={() => handleDecline(req)} className='button'>
-                                        <p>Decline</p>
+                    <div className='requests background'>
+                        <h1>Table Requests</h1>
+                        {requests.map((req, i) => {
+                            return (
+                                <div className='req' key={i}>
+                                    <h1> {/* onClick={() => toFamily(req.from)} */}
+                                        {req.from.name}
+                                    </h1>
+                                    <p>You have been invited to sit at the {req.from.name}'s table. Will you join them?</p>
+                                    <div className='reqButtons'>
+                                        <div onClick={() => handleAccept(req)} className='button'>
+                                            <p>Accept</p>
+                                        </div>
+                                        <div onClick={() => handleDecline(req)} className='button'>
+                                            <p>Decline</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
 
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return(
+                <div className='requestPage'>
+                    {nav()}
+
+                    <div className='requests background'>
+                        <h1>Table Requests</h1>
+                        <p>You have no pending requests.</p>
+                    </div>
+                </div>
+            );
+        }
     } else {
         updateProfile();
         return (

@@ -34,25 +34,38 @@ export default function Favorites(props) {
     }
 
     if(props.profile){
-        return(
-            <div>
-                {nav()}
+        if(props.profile.favorites.length > 0){
+            return(
+                <div>
+                    {nav()}
 
-                <div className='favorites background'>
-                    <h1>Your Favorites</h1>
-                    {props.profile.favorites.map((fav, i) => {
-                        return(
-                            <div key={i} className='recipe'>
-                                <a href='#' onClick={() => goToRecipe(fav)}>
-                                    <h1>{fav.name}</h1>
-                                </a>
-                                <p>This is a temporary fake description for the recipe. Whatever it is, it's probably delicious.</p>
-                            </div>
-                        );
-                    })}
+                    <div className='favorites background'>
+                        <h1>Your Favorites</h1>
+                        {props.profile.favorites.map((fav, i) => {
+                            return(
+                                <div key={i} className='recipe'>
+                                    <a href='#' onClick={() => goToRecipe(fav)}>
+                                        <h1>{fav.name}</h1>
+                                    </a>
+                                    <p>This is a temporary fake description for the recipe. Whatever it is, it's probably delicious.</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return(
+                <div>
+                    {nav()}
+
+                    <div className='favorites background'>
+                        <h1>Your Favorites</h1>
+                        <p>You havne't favorited any recipes yet.</p>
+                    </div>
+                </div>
+            );
+        }
     } else {
         if(!props.profile){
             updateProfile();

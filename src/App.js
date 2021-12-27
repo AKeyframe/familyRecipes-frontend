@@ -89,22 +89,33 @@ function App() {
     if(userState.user){     
       if(width > 650){
         if(profile){
-          return(
-            <div className='leftSidebar'>
-              <Link to='/families'>
-                <h2>Tables</h2>
-              </Link>
-              {profile.families.map((fam, i) => {
-                return(
-                  <div>
-                    <a onClick={() => handleFamFocus(fam)} href='#'>   
-                      <h3>{fam.name}</h3>
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-          );
+          if(profile.families.length > 0){
+            return(
+              <div className='leftSidebar'>
+                <Link to='/families'>
+                  <h2>Tables</h2>
+                </Link>
+                {profile.families.map((fam, i) => {
+                  return(
+                    <div key={i}>
+                      <a onClick={() => handleFamFocus(fam)} href='#'>   
+                        <h3>{fam.name}</h3>
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          } else {
+              return(
+                <div className='leftSidebar'>
+                  <Link to='/families'>
+                    <h2>Tables</h2>
+                  </Link>
+                  <p style={{textAlign: 'center'}}>You don't have any Tables yet</p>
+                </div>
+              );
+          }
         }
       }
     }
@@ -114,22 +125,33 @@ function App() {
     if(userState.user){     
       if(width > 650){
         if(profile){
-          return(
-            <div className='rightSidebar'>
-              <Link to='/favorites'>
-                <h2>Favorites</h2>
-              </Link>
-              {profile.favorites.map((fav, i) => {
-                  return(
-                    <div>
-                      <a onClick={() => handlerecFocus(fav)} href='#'>   
-                        <h3>{fav.name}</h3>
-                      </a>
-                    </div>
-                  );
-                })}
-            </div>
-          );
+          if(profile.favorites.length > 0){
+            return(
+              <div className='rightSidebar'>
+                <Link to='/favorites'>
+                  <h2>Favorites</h2>
+                </Link>
+                {profile.favorites.map((fav, i) => {
+                    return(
+                      <div key={i}>
+                        <a onClick={() => handlerecFocus(fav)} href='#'>   
+                          <h3>{fav.name}</h3>
+                        </a>
+                      </div>
+                    );
+                  })}
+              </div>
+            );
+          } else {
+              return(
+                <div className='rightSidebar'>
+                  <Link to='/favorites'>
+                    <h2>Favorites</h2>
+                  </Link>
+                  <p style={{textAlign: 'center'}}>You don't have any favorites yet</p>
+                </div>
+              );
+          }
         }
       }
     }
