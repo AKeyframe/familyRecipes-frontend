@@ -1,5 +1,5 @@
 
-const URL = "https://the-family-table.herokuapp.com/families";
+const URL = "https://the-family-table-backend.herokuapp.com/families";
 //const URL = "http://localhost:4000/families";
 
 
