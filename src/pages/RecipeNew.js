@@ -292,36 +292,38 @@ export default forwardRef(function RecipeNew (props, ref) {
                
                 <div className='new'>
                      {nav()}
-                    <form onSubmit={handleSubmit}>
-                        <div className='ingred'>
-                            <input type='hidden' name='creator' 
-                                    value={props.profile._id} />
-                            <h1>Recipe Name</h1>
-                            <input  className='rNameInput' type='text'
-                                    name='recipeName'                    placeholder='Recipe Name' 
-                                    onChange={handleChange} 
-                            />
+                    <div className='newInput background'>
+                        <form onSubmit={handleSubmit}>
+                            <div className='ingred'>
+                                <input type='hidden' name='creator' 
+                                        value={props.profile._id} />
+                                <h1>Recipe Name</h1>
+                                <input  className='rNameInput' type='text'
+                                        name='recipeName'                    placeholder='Recipe Name' 
+                                        onChange={handleChange} 
+                                />
 
-                            <div id='editTH' className='inline'>
-                                <h3>Amount</h3>
-                                <h3>Ingredient</h3>
-                                <div style={{width: '60px'}}></div>
+                                <div id='editTH' className='inline'>
+                                    <h3>Amount</h3>
+                                    <h3>Ingredient</h3>
+                                    <div style={{width: '60px'}}></div>
+                                </div>
+                                {numOfI}
+
+                                <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
                             </div>
-                            {numOfI}
 
-                            <button className='plus' type="button" onClick={handleAdditionalIngredient}>+</button>
-                        </div>
-
-                        <h3>Instructions</h3>
-                        {numOfSteps}
-                        
-                        <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
-                        <button style={{
-                            width: '150px',
-                            height: '40px',
+                            <h3>Instructions</h3>
+                            {numOfSteps}
                             
-                        }}><h2 style={{margin: '0px'}}>Submit</h2></button>
-                    </form>
+                            <button className="plus" onClick={handleAdditionalStep}type='button'>+</button> <br />
+                            <button style={{
+                                width: '150px',
+                                height: '40px',
+                                
+                            }}><h2 style={{margin: '0px'}}>Submit</h2></button>
+                        </form>
+                    </div>
                 </div>
             </div>
             

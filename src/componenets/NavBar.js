@@ -122,37 +122,37 @@ const NavBar = (props) => {
 
                             <div className='link'>
                                 <Link to='/profile' onClick={toggleMenu}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}}className='menuItem'>Profile</h2>
+                                    <h2 className='menuItem'>Profile</h2>
                                 </Link>
                             </div>
 
                             <div className='link'>
                                 <Link to='/recipes' onClick={toggleMenu}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}} className='menuItem'>Your Recipes</h2>
+                                    <h2 className='menuItem'>Your Recipes</h2>
                                 </Link>
                             </div>
 
                             <div className='link'>
                                 <Link to='/families' onClick={toggleMenu}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}} className='menuItem'>Family Tables</h2>
+                                    <h2 className='menuItem'>Family Tables</h2>
                                 </Link>
                             </div>
 
                             <div className='link'>
                                 <Link to='/favorites' onClick={toggleMenu}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}} className='menuItem'>Favorites</h2>
+                                    <h2 className='menuItem'>Favorites</h2>
                                 </Link>
                             </div>
 
                             <div className='link'>
                                 <Link to='/requests' onClick={toggleMenu}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}} className='menuItem'>Requests</h2>
+                                    <h2 className='menuItem'>Requests</h2>
                                 </Link>
                             </div>
                             
                             <div className='link'>
                                 <Link to='' onClick={handleLogout}>
-                                    <h2 style={{color: 'rgb(242, 41, 68)'}} className='menuItem'>Sign Out</h2>
+                                    <h2 className='menuItem'>Sign Out</h2>
                                 </Link>
                             </div>
 

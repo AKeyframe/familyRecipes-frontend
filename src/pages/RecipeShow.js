@@ -14,6 +14,7 @@ export default function RecipeShow(props){
    
     async function handleSubmit(){
         deleteRecipe(params.id);
+        props.setUpdate(true);
         navigate("/");
         props.setProfile(await getProfile(props.userState.user.profile));
         

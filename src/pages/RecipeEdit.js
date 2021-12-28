@@ -420,7 +420,7 @@ export default function RecipeEdit(props){
             <div>
                 {nav()}
                 
-                <div className='background new'>
+                <div className='background new edit'>
                     <form> {/*onSubmit={handleSubmit}*/}
                         <div className='ingred'>
                             <h1>Recipe Name</h1>

@@ -66,6 +66,8 @@ form{
 
     border: black solid .75px;
     box-shadow: $shadow;
+
+    padding: 10px;
   }
 
   button{
@@ -539,11 +541,11 @@ p {
 
   text-align: center;
 
-  form{
-    background-color:$bgColor;
-    border-radius: 10px;
-    box-shadow: $shadow;
-  }
+  // form{
+  //   background-color:$bgColor;
+  //   border-radius: 10px;
+  //   box-shadow: $shadow;
+  // }
 
   h1{
     margin: 10px 0px 0px 5px;
@@ -834,6 +836,9 @@ p {
 
 @media only screen and (min-width: 525px){
   .new{
+    .newInput{
+      width: 90%;
+    }
     .ingInp{
       height: 20px;
       width: 250px;
@@ -946,23 +951,41 @@ p {
     width: 90%;
   }
 
+  .show{
+    table{
+      th{
+        font-size: 20px;
+      }
+
+      td{
+        font-size: 16px;
+        padding: 5px;
+      }
+    }
+    
+    .stepsList{
+      p{
+        margin: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+
   .recipeNewPage{
     display: inline-block;
   }
 
+  
+
+
   .new{
     grid-area: 1 / 2 / 2 / 3;
     width: 100%;
-    margin-top: 20px;
+    margin-top: -3px;
     
     padding: 3px;
 
-    form{
-      background-color:$bgColor;
-      border-radius: 10px;
-      box-shadow: $shadow;
-    }
-
+    
     .blankMinusDiv{
       min-width: 85px;
     }
@@ -979,6 +1002,10 @@ p {
       height: 20px;
       font-size: 14px;
     }
+  }
+
+  .edit{
+    margin-top: 20px;
   }
 
   .show{
@@ -1043,5 +1070,35 @@ p {
     h3{
       font-size: 18px;
     }
+  }
+}
+
+@media only screen and (min-width: 1000px){
+  
+  .leftSidebar{
+    h2{
+      font-size: 38px;
+    }
+
+    h3{
+      font-size: 24px;
+    }
+  }
+
+  .rightSidebar{
+    h2{
+      font-size: 38px;
+    }
+    h3{
+      font-size: 22px;
+    }
+  }
+
+  .background{
+    padding: 25px;
+  }
+
+  .recipe{
+    margin: 15px 30px;
   }
 }
