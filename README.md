@@ -19,12 +19,12 @@ The Family Table is a responsive, full MERN stack web application for users to s
 ![ERD](/wireframes/ERD.png)
 
 ## Future Functionality
-Polish and finsih what's already there / imporved UX
-Email Verification
-Password recovery
-Google OAuth
-Add Images to recipes
-Public recipes
-Search recipes
+- Polish and finsih what's already there / imporved UX
+- Email Verification
+- Password recovery
+- Google OAuth
+- Add Images to recipes
+- Public recipes
+- Search recipes
 
 
